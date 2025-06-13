@@ -1,6 +1,7 @@
 import { PropsWithChildren, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { usePostHog } from "posthog-react-native";
+import { theme } from "../../styles/theme";
 
 export const CustomText = ({ children }: PropsWithChildren) => (
   <Text>{children}</Text>
@@ -23,7 +24,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.primary[500],
     alignItems: "center",
     justifyContent: "center",
   },
