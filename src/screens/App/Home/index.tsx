@@ -1,5 +1,6 @@
 import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
 import { Text, View } from "react-native";
+import { DailySummaryCard } from "./components/DailySummaryCard";
 
 export const HomeScreen = () => {
   return (
@@ -11,18 +12,20 @@ export const HomeScreen = () => {
         rightIconOnPress: () => console.log("Settings Pressed"),
       }}
     >
-      <View>
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: "bold",
-            textAlign: "center",
-            marginVertical: 20,
-          }}
-        >
-          Home
-        </Text>
-      </View>
+      <DailySummaryCard
+        cards={[
+          {
+            title: "Reservas Hoje",
+            value: "12",
+            info: "+3 que ontem",
+          },
+          {
+            title: "Receita Hoje",
+            value: "R$ 480",
+            info: "+R$120 que ontem",
+          },
+        ]}
+      />
     </ContentPageTemplate>
   );
 };

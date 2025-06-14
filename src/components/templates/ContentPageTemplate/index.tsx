@@ -14,29 +14,22 @@ export const ContentPageTemplate = ({
   return (
     <>
       {headerProps && <Header {...headerProps} />}
-
-      <SafeAreaView
-        testID={`${testIDPrefix}-content-page-template`}
-        edges={["top", "bottom"]}
-        style={styles.container}
-      >
-        <View style={styles.contentContainer}>
-          {isScrollable ? (
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              bounces={false}
-              contentContainerStyle={styles.scrollContent}
-              keyboardShouldPersistTaps="handled"
-            >
-              <View style={styles.content}>{children}</View>
-            </ScrollView>
-          ) : (
-            <View style={styles.content}>
-              <View style={styles.fixedContent}>{children}</View>
-            </View>
-          )}
-        </View>
-      </SafeAreaView>
+      <View style={styles.contentContainer}>
+        {isScrollable ? (
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            bounces={false}
+            contentContainerStyle={styles.scrollContent}
+            keyboardShouldPersistTaps="handled"
+          >
+            <View style={styles.content}>{children}</View>
+          </ScrollView>
+        ) : (
+          <View style={styles.content}>
+            <View style={styles.fixedContent}>{children}</View>
+          </View>
+        )}
+      </View>
     </>
   );
 };
