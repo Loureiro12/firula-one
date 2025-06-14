@@ -62,9 +62,8 @@ export const UpcomingReservationsBox = ({
       ) : (
         <>
           {mockReservations.map((reservation, index) => (
-            <>
+            <View key={reservation.id}>
               <Card
-                key={reservation.id}
                 id={reservation.id}
                 type={reservation.type}
                 title={reservation.title}
@@ -73,7 +72,7 @@ export const UpcomingReservationsBox = ({
               {index < mockReservations.length - 1 && (
                 <View style={styles.separator} />
               )}
-            </>
+            </View>
           ))}
         </>
       )}

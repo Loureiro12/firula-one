@@ -3,8 +3,12 @@ import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
 import { DailySummaryCard } from "./components/DailySummaryCard";
 import { ActionButtonsContainer } from "./components/ActionButtonsContainer";
 import { UpcomingReservationsBox } from "./components/UpcomingReservationsBox";
+import { OccupationOfTheCourt } from "./components/OccupationOfTheCourt";
+
+import { useHome } from "./hooks";
 
 export const HomeScreen = () => {
+  const { isLoading } = useHome();
   return (
     <ContentPageTemplate
       isScrollable
@@ -27,9 +31,11 @@ export const HomeScreen = () => {
             info: "+R$120 que ontem",
           },
         ]}
+        isLoading={isLoading}
       />
+      <OccupationOfTheCourt isLoading={isLoading} />
       <ActionButtonsContainer />
-      <UpcomingReservationsBox />
+      <UpcomingReservationsBox isLoading={isLoading} />
     </ContentPageTemplate>
   );
 };
