@@ -7,6 +7,12 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: theme.spacing[4],
   },
+  skeletonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    gap: theme.spacing[2],
+  },
   card: {
     backgroundColor: theme.colors.primary[100],
     padding: theme.spacing[4],

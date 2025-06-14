@@ -6,4 +6,5 @@ interface ICardProps {
 
 export interface IDailySummaryCardProps {
   cards: ICardProps[];
+  isLoading?: boolean;
 }
