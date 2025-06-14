@@ -1,19 +1,25 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignInScreen from "../screens/SignIn";
+import React from "react";
+import { PostHogProvider } from "posthog-react-native";
 
-const Stack = createNativeStackNavigator();
+import { NavigationContainer } from "@react-navigation/native";
+
+import AuthRootStack from "./auth.routes";
+import AppRootStack from "./app.routes";
 
 export default function RootStack() {
+  const postHogApiKey = process.env.EXPO_PUBLIC_POST_HOG_KEY;
+
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="SignIn"
-        component={SignInScreen}
+    <NavigationContainer>
+      <PostHogProvider
+        apiKey={postHogApiKey}
         options={{
-          headerShown: false,
-          animation: "slide_from_right",
+          host: "https://us.i.posthog.com",
         }}
-      />
-    </Stack.Navigator>
+      >
+        {/* <AuthRootStack /> */}
+        <AppRootStack />
+      </PostHogProvider>
+    </NavigationContainer>
   );
 }
