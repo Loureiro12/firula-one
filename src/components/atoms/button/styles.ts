@@ -3,7 +3,6 @@ import { theme } from "../../../styles/theme";
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.primary['100'],
     paddingVertical: theme.spacing[3.5],
     width: '100%',
     borderRadius: theme.radii['lg'],

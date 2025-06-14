@@ -5,4 +5,6 @@ export interface IButtonProps extends PressableProps {
   label: string;
   iconName?: keyof typeof Ionicons.glyphMap;
   testIDPrefix?: string;
+  isDisabled?: boolean;
+  isLoading?: boolean;
 }

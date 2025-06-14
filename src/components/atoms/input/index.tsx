@@ -32,7 +32,7 @@ export const Input = ({
         <TextInput
           {...rest}
           style={styles.input}
-          secureTextEntry={showPassword}
+          secureTextEntry={showPassword && isPassword}
           editable={!isDisabled}
           testID="text-input"
         />

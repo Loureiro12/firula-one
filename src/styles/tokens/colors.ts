@@ -1,6 +1,7 @@
 export const colors = {
   primary: {
     100: "#1FBD58",
+    200: '#A8DAB6'
   },
 
   // Cores neutras
