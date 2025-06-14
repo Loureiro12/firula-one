@@ -1,8 +1,8 @@
 import { PropsWithChildren, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { usePostHog } from "posthog-react-native";
-import { theme } from "../../styles/theme";
-import { Button } from "../../components/atoms/button";
+import { Button } from "@components/atoms";
+import { theme } from "@styles/theme";
 
 export const CustomText = ({ children }: PropsWithChildren) => (
   <Text>{children}</Text>
