@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { usePostHog } from "posthog-react-native";
-import { Button } from "@components/atoms";
+import { Button, Input } from "@components/atoms";
 import { theme } from "@styles/theme";
 
 export const CustomText = ({ children }: PropsWithChildren) => (
@@ -18,6 +18,18 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <CustomText>Welcome!</CustomText>
+      <Input
+        label="Email"
+        errorMensage="Please enter a valid email address"
+        iconLeft="mail-outline"
+        iconRight="checkmark-circle-outline"
+        placeholder="Enter your email"
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="email-address"
+        returnKeyType="done"
+        clearButtonMode="while-editing"
+      />
       <Button label="Entrar" onPress={() => console.log("Press")} />
     </View>
   );

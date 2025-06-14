@@ -1,0 +1,246 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Component matches snapshot with all props 1`] = `
+<View
+  style={
+    {
+      "width": "100%",
+    }
+  }
+  testID="login-input-container"
+>
+  <Text
+    style={
+      {
+        "color": "#171717",
+        "fontSize": 14,
+        "fontWeight": "400",
+        "marginBottom": 10,
+      }
+    }
+  >
+    Test Label
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "borderColor": "gray",
+        "borderRadius": 8,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 50,
+        "paddingHorizontal": 12,
+      }
+    }
+  >
+    <Text
+      allowFontScaling={false}
+      selectable={false}
+      style={
+        [
+          {
+            "color": "gray",
+            "fontSize": 24,
+          },
+          {
+            "marginRight": 8,
+          },
+          {
+            "fontFamily": "ionicons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          {},
+        ]
+      }
+    >
+      
+    </Text>
+    <TextInput
+      editable={true}
+      onChangeText={
+        [MockFunction] {
+          "calls": [
+            [
+              "new text",
+            ],
+          ],
+          "results": [
+            {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      placeholder="Enter text"
+      secureTextEntry={true}
+      style={
+        {
+          "flex": 1,
+          "height": "100%",
+        }
+      }
+      testID="text-input"
+    />
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        selectable={false}
+        style={
+          [
+            {
+              "color": "gray",
+              "fontSize": 24,
+            },
+            {
+              "marginLeft": 8,
+            },
+            {
+              "fontFamily": "ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+    <Text
+      allowFontScaling={false}
+      selectable={false}
+      style={
+        [
+          {
+            "color": "gray",
+            "fontSize": 24,
+          },
+          {
+            "marginLeft": 8,
+          },
+          {
+            "fontFamily": "ionicons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+  <Text
+    style={
+      {
+        "color": "#ef4444",
+        "fontSize": 12,
+        "marginTop": 4,
+      }
+    }
+  >
+    Error message
+  </Text>
+</View>
+`;
+
+exports[`Input Component matches snapshot with basic props 1`] = `
+<View
+  style={
+    {
+      "width": "100%",
+    }
+  }
+  testID="login-input-container"
+>
+  <Text
+    style={
+      {
+        "color": "#171717",
+        "fontSize": 14,
+        "fontWeight": "400",
+        "marginBottom": 10,
+      }
+    }
+  >
+    Test Label
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "borderColor": "gray",
+        "borderRadius": 8,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 50,
+        "paddingHorizontal": 12,
+      }
+    }
+  >
+    <TextInput
+      editable={true}
+      onChangeText={
+        [MockFunction] {
+          "calls": [
+            [
+              "new text",
+            ],
+          ],
+          "results": [
+            {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      placeholder="Enter text"
+      secureTextEntry={true}
+      style={
+        {
+          "flex": 1,
+          "height": "100%",
+        }
+      }
+      testID="text-input"
+    />
+  </View>
+</View>
+`;
