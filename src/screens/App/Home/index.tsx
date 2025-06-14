@@ -1,18 +1,28 @@
+import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
 import { Text, View } from "react-native";
 
 export const HomeScreen = () => {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text
-        style={{
-          fontSize: 24,
-          fontWeight: "bold",
-          textAlign: "center",
-          marginVertical: 20,
-        }}
-      >
-        Home
-      </Text>
-    </View>
+    <ContentPageTemplate
+      isScrollable
+      headerProps={{
+        title: "Firula - One",
+        rightIcon: "notifications-outline",
+        rightIconOnPress: () => console.log("Settings Pressed"),
+      }}
+    >
+      <View>
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: "bold",
+            textAlign: "center",
+            marginVertical: 20,
+          }}
+        >
+          Home
+        </Text>
+      </View>
+    </ContentPageTemplate>
   );
 };
