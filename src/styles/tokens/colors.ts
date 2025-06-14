@@ -6,7 +6,7 @@ export const colors = {
 
   // Cores neutras
   neutral: {
-    20:  '#F9FAFB',
+    20: "#F9FAFB",
     50: "#fafafa",
     100: "#f5f5f5",
     200: "#e5e5e5",
@@ -27,6 +27,16 @@ export const colors = {
     gray05: "rgba(24, 23, 22, 1)",
     gray06: "rgba(233, 233, 232, 1)",
     gray07: "rgba(251, 249, 249, 0.02)",
+  },
+
+  green: {
+    50: "#DCFCE7",
+    100: "#166534",
+  },
+
+  yellow: {
+    50: '#FEF9C3',
+    100: '#854D0E',
   },
 
   // Cores semânticas

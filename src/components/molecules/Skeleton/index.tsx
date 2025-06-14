@@ -1,19 +1,22 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import React, { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 import Animated, {
   interpolate,
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
   withTiming,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-
-import styles from './styles';
-import { ISkeleton } from './types';
-import { theme } from '@styles/theme';
-import { horizontalScale, moderateScale, screenWidth } from 'src/utils/dimensions';
+import styles from "./styles";
+import { ISkeleton } from "./types";
+import { theme } from "@styles/theme";
+import {
+  horizontalScale,
+  moderateScale,
+  screenWidth,
+} from "src/utils/dimensions";
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 
@@ -26,6 +29,7 @@ export const Skeleton = ({
   height,
   radius,
   align,
+  isFullWidth = false,
   testIDPrefix,
 }: ISkeleton) => {
   const x = useSharedValue(0);
@@ -41,7 +45,7 @@ export const Skeleton = ({
   useEffect(() => {
     x.value = withRepeat(
       withTiming(1, { duration: DEFAULT_ANIMATION_DURATION }),
-      NUMBER_OF_LOOPS,
+      NUMBER_OF_LOOPS
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,15 +57,20 @@ export const Skeleton = ({
           styles.box,
           { alignSelf: align },
           {
-            width: horizontalScale(width),
+            width: isFullWidth ? "100%" : horizontalScale(width ?? 0),
             height: moderateScale(height),
             borderRadius: moderateScale(radius || 4),
           },
-        ]}>
+        ]}
+      >
         <AnimatedLinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={[theme.colors.gray.gray06, theme.colors.gray.gray02, theme.colors.gray.gray06]}
+          colors={[
+            theme.colors.gray.gray06,
+            theme.colors.gray.gray02,
+            theme.colors.gray.gray06,
+          ]}
           style={[{ ...StyleSheet.absoluteFillObject }, animationStyle]}
         />
       </View>

@@ -1,7 +1,8 @@
 import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
-import { Text, View } from "react-native";
+
 import { DailySummaryCard } from "./components/DailySummaryCard";
 import { ActionButtonsContainer } from "./components/ActionButtonsContainer";
+import { UpcomingReservationsBox } from "./components/UpcomingReservationsBox";
 
 export const HomeScreen = () => {
   return (
@@ -28,6 +29,7 @@ export const HomeScreen = () => {
         ]}
       />
       <ActionButtonsContainer />
+      <UpcomingReservationsBox />
     </ContentPageTemplate>
   );
 };
