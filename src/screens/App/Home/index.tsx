@@ -8,7 +8,7 @@ import { OccupationOfTheCourt } from "./components/OccupationOfTheCourt";
 import { useHome } from "./hooks";
 
 export const HomeScreen = () => {
-  const { isLoading } = useHome();
+  const { isLoading, handleNavigateToValidateReservations } = useHome();
   return (
     <ContentPageTemplate
       isScrollable
@@ -34,7 +34,11 @@ export const HomeScreen = () => {
         isLoading={isLoading}
       />
       <OccupationOfTheCourt isLoading={isLoading} />
-      <ActionButtonsContainer />
+      <ActionButtonsContainer 
+        onValidateReservationsPress={handleNavigateToValidateReservations}
+        onCreateReservationPress={() => console.log("Create Reservation Pressed")}
+        onManageReservationsPress={() => console.log("Manage Reservations Pressed")}
+      />
       <UpcomingReservationsBox isLoading={isLoading} />
     </ContentPageTemplate>
   );

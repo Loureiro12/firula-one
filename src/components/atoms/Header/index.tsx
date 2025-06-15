@@ -5,6 +5,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { styles } from "./styles";
 import { IHeaderProps } from "./types";
+import { theme } from "@styles/theme";
 
 export const Header = ({
   onArrowBackPress,
@@ -18,9 +19,10 @@ export const Header = ({
       <TouchableOpacity
         activeOpacity={0.8}
         style={{ flex: 1, alignItems: "flex-start" }}
+        onPress={onArrowBackPress}
       >
         {onArrowBackPress && (
-          <Ionicons name="chevron-back" size={24} color="black" />
+          <Ionicons name="chevron-back" size={24} color={theme.colors.primary[100]} />
         )}
       </TouchableOpacity>
       <View style={{ flex: 3, alignItems: "center" }}>
