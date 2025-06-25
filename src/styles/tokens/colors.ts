@@ -6,6 +6,7 @@ export const colors = {
 
   // Cores neutras
   neutral: {
+    10: '#f0f0f0',
     20: "#F9FAFB",
     50: "#fafafa",
     100: "#f5f5f5",

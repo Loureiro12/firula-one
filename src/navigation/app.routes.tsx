@@ -4,7 +4,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { AdjustmentsScreen } from "@screens/App/Adjustments";
 import { AgendaScreen } from "@screens/App/Agenda";
-import { FinanceScreen } from "@screens/App/Finance";
+import { MetricsScreen } from "@screens/App/Metrics";
 import { HomeScreen } from "@screens/App/Home";
 import { ValidateReservations } from "@screens/App/ValidateReservations";
 
@@ -13,7 +13,7 @@ export type AppTabStackParamList = {
   ValidateReservations: undefined;
   Home: undefined;
   Agenda: undefined;
-  Finance: undefined;
+  Metrics: undefined;
   Adjustments: undefined;
 };
 
@@ -31,8 +31,8 @@ function TabRootStack() {
             iconName = focused ? "home" : "home-outline";
           } else if (route.name === "Agenda") {
             iconName = focused ? "calendar" : "calendar-outline";
-          } else if (route.name === "Finance") {
-            iconName = focused ? "wallet" : "wallet-outline";
+          } else if (route.name === "Metrics") {
+            iconName = focused ? "stats-chart" : "stats-chart-outline";
           } else if (route.name === "Adjustments") {
             iconName = focused ? "settings" : "settings-outline";
           } else {
@@ -49,7 +49,7 @@ function TabRootStack() {
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Agenda" component={AgendaScreen} />
-      <Tab.Screen name="Finance" component={FinanceScreen} />
+      <Tab.Screen name="Metrics" component={MetricsScreen} />
       <Tab.Screen name="Adjustments" component={AdjustmentsScreen} />
     </Tab.Navigator>
   );
