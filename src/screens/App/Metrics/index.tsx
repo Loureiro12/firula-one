@@ -23,7 +23,7 @@ export const MetricsScreen = () => {
           onChange={setSelectedTab}
           selectedValue={selectedTab}
         />
-        <ContainerCardStatistic loading />
+        <ContainerCardStatistic loading={false} />
       </View>
     </ContentPageTemplate>
   );
