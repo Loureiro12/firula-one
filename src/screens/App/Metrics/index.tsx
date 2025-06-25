@@ -1,6 +1,10 @@
+import { View } from "react-native";
+
 import { TabSwitcher } from "@components/molecules";
 import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
-import { Text, View } from "react-native";
+
+import { ContainerCardStatistic } from "./components/ContainerCardStatistic";
+
 import { styles } from "./styles";
 import { useMetrics } from "./hook";
 
@@ -19,6 +23,7 @@ export const MetricsScreen = () => {
           onChange={setSelectedTab}
           selectedValue={selectedTab}
         />
+        <ContainerCardStatistic loading />
       </View>
     </ContentPageTemplate>
   );
