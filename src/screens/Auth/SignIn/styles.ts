@@ -23,4 +23,18 @@ export const styles = StyleSheet.create({
     color: theme.colors.neutral[500],
     marginBottom: theme.spacing["4"],
   },
+  footer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: theme.spacing["1"],
+  },
+  textFooter: {
+    color: theme.colors.neutral[500],
+    fontSize: theme.typography.fontSizes.sm,
+  },
+  textSubscribe: {
+    color: theme.colors.primary["100"],
+    fontWeight: "bold",
+  },
 });

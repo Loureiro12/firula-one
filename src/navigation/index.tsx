@@ -17,8 +17,8 @@ export default function RootStack() {
           host: "https://us.i.posthog.com",
         }}
       >
-        {/* <AuthRootStack /> */}
-        <AppRootStack />
+        <AuthRootStack />
+        {/* <AppRootStack /> */}
       </PostHogProvider>
     </NavigationContainer>
   );

@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Controller } from "react-hook-form";
 
 import { Button, Input } from "@components/atoms";
@@ -32,7 +32,7 @@ export default function SignInScreen() {
               required: locales.form.email.errorRequired,
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message:  locales.form.email.errorPattern,
+                message: locales.form.email.errorPattern,
               },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -90,6 +90,13 @@ export default function SignInScreen() {
           isDisabled={(!isValid && submitted) || isSubmitting}
           isLoading={isSubmitting}
         />
+      </View>
+
+      <View style={styles.footer}>
+        <Text style={styles.textFooter}>Não tem conta?</Text>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
+          <Text style={styles.textSubscribe}>Cadastre-se</Text>
+        </TouchableOpacity>
       </View>
     </InteractiveTemplate>
   );
