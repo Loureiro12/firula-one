@@ -22,7 +22,8 @@ export const OccupationOfTheCourt = ({
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Ocupação da Quadra</Text>
-      {isLoading ? (
+      <View style={{ flex: 1, alignItems: "center" }}>
+        {isLoading ? (
         <Skeleton isFullWidth height={200} radius={8} align="flex-start" />
       ) : (
         <LineChart
@@ -30,7 +31,6 @@ export const OccupationOfTheCourt = ({
           curved
           data={data1}
           hideDataPoints
-          spacing={68}
           color1={theme.colors.primary[100]}
           startFillColor1={theme.colors.primary[200]}
           endFillColor1={theme.colors.primary[200]}
@@ -45,6 +45,7 @@ export const OccupationOfTheCourt = ({
           xAxisColor="lightgray"
         />
       )}
+      </View>
     </View>
   );
 };

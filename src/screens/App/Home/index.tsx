@@ -3,7 +3,7 @@ import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
 import { DailySummaryCard } from "./components/DailySummaryCard";
 import { ActionButtonsContainer } from "./components/ActionButtonsContainer";
 import { UpcomingReservationsBox } from "./components/UpcomingReservationsBox";
-import { OccupationOfTheCourt } from "./components/OccupationOfTheCourt";
+import { OccupationOfTheCourt } from "../Metrics/components/OccupationOfTheCourt";
 
 import { useHome } from "./hooks";
 
@@ -33,7 +33,6 @@ export const HomeScreen = () => {
         ]}
         isLoading={isLoading}
       />
-      <OccupationOfTheCourt isLoading={isLoading} />
       <ActionButtonsContainer 
         onValidateReservationsPress={handleNavigateToValidateReservations}
         onCreateReservationPress={() => console.log("Create Reservation Pressed")}

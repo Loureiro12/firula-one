@@ -5,6 +5,36 @@ import { ICardProps } from "./types";
 import { theme } from "@styles/theme";
 
 export const Card = ({ type, description, title }: ICardProps) => {
+  const FlagContainerBackgroundStyles = () => {
+    switch (type) {
+      case "Pending":
+        return theme.colors.yellow[100];
+      case "Confirmed":
+        return theme.colors.green[50];
+      case "Cancelled":
+        return theme.colors.error[100];
+      case "Completed":
+        return theme.colors.info;
+      default:
+        return theme.colors.neutral[900];
+    }
+  };
+
+  const FlagTextColorStyles = () => {
+    switch (type) {
+      case "Pending":
+        return theme.colors.white;
+      case "Confirmed":
+        return theme.colors.green[100];
+      case "Cancelled":
+        return theme.colors.white;
+      case "Completed":
+        return theme.colors.white;
+      default:
+        return theme.colors.neutral[900];
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -16,10 +46,7 @@ export const Card = ({ type, description, title }: ICardProps) => {
         style={[
           styles.containerFlag,
           {
-            backgroundColor:
-              type === "Pending"
-                ? theme.colors.yellow[50]
-                : theme.colors.green[50],
+            backgroundColor: FlagContainerBackgroundStyles(),
           },
         ]}
       >
@@ -27,10 +54,7 @@ export const Card = ({ type, description, title }: ICardProps) => {
           style={[
             styles.textFlag,
             {
-              color:
-                type === "Pending"
-                  ? theme.colors.yellow[100]
-                  : theme.colors.green[100],
+              color: FlagTextColorStyles(),
             },
           ]}
         >

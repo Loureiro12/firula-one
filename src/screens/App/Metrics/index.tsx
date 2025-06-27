@@ -7,6 +7,9 @@ import { ContainerCardStatistic } from "./components/ContainerCardStatistic";
 
 import { styles } from "./styles";
 import { useMetrics } from "./hook";
+import { OccupationOfTheCourt } from "./components/OccupationOfTheCourt";
+import { BillingChart } from "./components/BillingChart";
+import { LastReservations } from "./components/LastReservations";
 
 export const MetricsScreen = () => {
   const { selectedTab, setSelectedTab, tabItems } = useMetrics();
@@ -24,6 +27,9 @@ export const MetricsScreen = () => {
           selectedValue={selectedTab}
         />
         <ContainerCardStatistic loading={false} />
+        {/* <OccupationOfTheCourt />
+        <BillingChart /> */}
+        <LastReservations />
       </View>
     </ContentPageTemplate>
   );

@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontFamily: theme.typography.fontWeights.bold,
-    fontSize: theme.typography.fontSizes.lg,
+    fontSize: theme.typography.fontSizes.base,
     color: theme.colors.neutral[900],
     fontWeight: theme.typography.fontWeights.bold,
     marginBottom: theme.spacing[5],
