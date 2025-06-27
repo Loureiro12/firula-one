@@ -12,13 +12,20 @@ export const Input = ({
   iconRight,
   isPassword = false,
   isDisabled = false,
+  isFlex = false,
   testIDPrefix,
   ...rest
 }: IInputProps) => {
   const [showPassword, setShowPassword] = useState(true);
 
   return (
-    <View style={styles.container} testID={`${testIDPrefix}-input-container`}>
+    <View
+      style={{
+        width: "100%",
+        flex: isFlex ? 1 : undefined,
+      }}
+      testID={`${testIDPrefix}-input-container`}
+    >
       {label ? <Text style={styles.label}>{label}</Text> : null}
       <View style={styles.content}>
         {iconLeft ? (
@@ -48,7 +55,9 @@ export const Input = ({
               size={24}
               color="gray"
               style={{ marginLeft: 8 }}
-              testID={showPassword ? "icon-eye-off-outline" : "icon-eye-outline"} 
+              testID={
+                showPassword ? "icon-eye-off-outline" : "icon-eye-outline"
+              }
             />
           </TouchableOpacity>
         ) : null}

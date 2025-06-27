@@ -18,6 +18,7 @@ export default function SignInScreen() {
     onSubmit,
     setSubmitted,
     submitted,
+    handleNavigateToSignUp,
   } = useSignIn();
 
   return (
@@ -94,7 +95,7 @@ export default function SignInScreen() {
 
       <View style={styles.footer}>
         <Text style={styles.textFooter}>Não tem conta?</Text>
-        <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
+        <TouchableOpacity activeOpacity={0.7} onPress={handleNavigateToSignUp}>
           <Text style={styles.textSubscribe}>Cadastre-se</Text>
         </TouchableOpacity>
       </View>

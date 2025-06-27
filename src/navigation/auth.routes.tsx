@@ -1,7 +1,13 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignInScreen from "../screens/Auth/SignIn";
+import { SignUpScreen } from "@screens/Auth/SignUp";
 
-const Stack = createNativeStackNavigator();
+export type AuthRootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+};
+
+const Stack = createNativeStackNavigator<AuthRootStackParamList>();
 
 export default function AuthRootStack() {
   return (
@@ -9,6 +15,14 @@ export default function AuthRootStack() {
       <Stack.Screen
         name="SignIn"
         component={SignInScreen}
+        options={{
+          headerShown: false,
+          animation: "slide_from_right",
+        }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
         options={{
           headerShown: false,
           animation: "slide_from_right",

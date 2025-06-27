@@ -9,4 +9,5 @@ export interface IInputProps extends TextInputProps {
   isPassword?: boolean;
   isDisabled?: boolean;
   testIDPrefix?: string;
+  isFlex?: boolean;
 }

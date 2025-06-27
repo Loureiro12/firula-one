@@ -1,26 +1,15 @@
 import { useForm } from "react-hook-form";
-import { usePostHog } from "posthog-react-native";
-import { useEffect, useState } from "react";
+import { FormData } from "./types";
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthRootStackParamList } from "@navigation/auth.routes";
 
-type FormData = {
-  email: string;
-  password: string;
-};
-
-export const useSignIn = () => {
+export const useSignUp = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthRootStackParamList>>();
 
-  const posthog = usePostHog();
-
   const [submitted, setSubmitted] = useState(false);
-
-  const handleNavigateToSignUp = () => {
-    navigation.navigate("SignUp");
-  };
 
   const {
     control,
@@ -29,30 +18,33 @@ export const useSignIn = () => {
   } = useForm<FormData>({
     mode: "onBlur",
     defaultValues: {
+      name: "",
+      lastName: "",
       email: "",
       password: "",
+      confirmPassword: "",
+      phone: "",
+      document: "",
     },
   });
 
   const onSubmit = (data: FormData) => {
     console.log("Dados do formulário:", data);
+  };
 
-    posthog.capture("user_sign_in", {
-      user_email: data.email,
-    });
-
-    setSubmitted(true);
+  const handleNavigateToSignIn = () => {
+    navigation.navigate("SignIn");
   };
 
   return {
     control,
-    handleSubmit,
     errors,
-    isValid,
+    handleSubmit,
     isSubmitting,
-    submitted,
-    setSubmitted,
+    isValid,
     onSubmit,
-    handleNavigateToSignUp,
+    setSubmitted,
+    submitted,
+    handleNavigateToSignIn,
   };
 };
