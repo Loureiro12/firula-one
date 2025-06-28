@@ -13,6 +13,10 @@ export const useHome = () => {
     navigation.navigate("ValidateReservations");
   };
 
+  const handleNavigateToPendingProfile = () => {
+    navigation.navigate("PendingProfileScreen");
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -24,5 +28,6 @@ export const useHome = () => {
   return {
     isLoading,
     handleNavigateToValidateReservations,
+    handleNavigateToPendingProfile,
   };
 };

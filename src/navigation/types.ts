@@ -12,6 +12,7 @@ export type AppTabStackParamList = {
   Agenda: undefined;
   Metrics: undefined;
   Adjustments: undefined;
+  PendingProfileScreen: undefined;
 };
 
 export type RootStackParamList = {

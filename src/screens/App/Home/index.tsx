@@ -9,7 +9,11 @@ import { useHome } from "./hooks";
 import { AccountPendingAlert } from "./components/AccountPendingAlert";
 
 export const HomeScreen = () => {
-  const { isLoading, handleNavigateToValidateReservations } = useHome();
+  const {
+    isLoading,
+    handleNavigateToValidateReservations,
+    handleNavigateToPendingProfile,
+  } = useHome();
   return (
     <ContentPageTemplate
       isScrollable
@@ -19,7 +23,7 @@ export const HomeScreen = () => {
         rightIconOnPress: () => console.log("Settings Pressed"),
       }}
     >
-      <AccountPendingAlert />
+      <AccountPendingAlert onPress={handleNavigateToPendingProfile} />
       <DailySummaryCard
         cards={[
           {

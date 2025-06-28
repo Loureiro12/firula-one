@@ -8,6 +8,7 @@ import { MetricsScreen } from "@screens/App/Metrics";
 import { HomeScreen } from "@screens/App/Home";
 import { ValidateReservations } from "@screens/App/ValidateReservations";
 import { AppTabStackParamList } from "./types";
+import { PendingProfileScreen } from "@screens/App/PendingProfile";
 
 const Tab = createBottomTabNavigator<AppTabStackParamList>();
 const Stack = createNativeStackNavigator<AppTabStackParamList>();
@@ -64,6 +65,7 @@ export default function AppRootStack() {
           animation: "slide_from_right",
         }}
       />
+      <Stack.Screen name="PendingProfileScreen" component={PendingProfileScreen}  />
     </Stack.Navigator>
   );
 }
