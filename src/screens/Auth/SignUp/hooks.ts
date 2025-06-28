@@ -6,6 +6,7 @@ import { AuthRootStackParamList } from "@navigation/types";
 import { Alert } from "react-native";
 import { useAuthStore } from "src/store/authStore";
 import { FormData } from "./types";
+import { removeMask } from "src/utils/function";
 
 export const useSignUp = () => {
   const navigation =
@@ -32,29 +33,32 @@ export const useSignUp = () => {
   });
 
   const onSubmit = async (formData: FormData) => {
+    console.log("Form Data:", formData);
     try {
       setSubmitted(true);
+
+      if (formData.password !== formData.confirmPassword) {
+        Alert.alert(
+          "Erro no cadastro",
+          "As senhas não coincidem. Por favor, verifique e tente novamente."
+        );
+        return;
+      }
 
       await register({
         name: `${formData.name} ${formData.lastName}`.trim(),
         email: formData.email,
         password: formData.password,
-        document: formData.document,
-        phone: formData.phone,
+        document: removeMask(formData.document),
+        phone: removeMask(formData.phone),
       });
       reset();
     } catch (error: any) {
-      if (error.code === "EMAIL_EXISTS") {
-        setError("email", {
-          type: "manual",
-          message: "Este email já está cadastrado",
-        });
-      } else {
-        Alert.alert(
-          "Erro no cadastro",
-          error.message || "Ocorreu um erro ao realizar o cadastro"
-        );
-      }
+      console.error("Error during registration:", error);
+      Alert.alert(
+        "Erro no cadastro",
+        error.message || "Ocorreu um erro ao realizar o cadastro"
+      );
     } finally {
       setSubmitted(false);
     }

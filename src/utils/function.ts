@@ -13,3 +13,7 @@ export const isValidCPF = (cpf: string): boolean => {
 
   return rest(10) === cpfDigits[9] && rest(11) === cpfDigits[10];
 };
+
+export const removeMask = (value: string): string => {
+  return value.replace(/\D/g, '')
+}

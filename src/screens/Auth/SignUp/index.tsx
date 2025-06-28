@@ -215,9 +215,6 @@ export const SignUpScreen = () => {
             control={control}
             rules={{
               required: locales.form.confirmPassword.errorRequired,
-              validate: (value) =>
-                value === control._formValues.password ||
-                locales.form.confirmPassword.errorMatch,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <Input
