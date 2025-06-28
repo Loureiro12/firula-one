@@ -15,7 +15,6 @@ export const SignUpScreen = () => {
     isSubmitting,
     isValid,
     onSubmit,
-    setSubmitted,
     submitted,
     handleNavigateToSignIn,
   } = useSignUp();
@@ -244,8 +243,7 @@ export const SignUpScreen = () => {
         <Button
           label={locales.form.buttons.signUp}
           onPress={() => {
-            setSubmitted(true);
-            handleSubmit(onSubmit)();
+            handleSubmit();
           }}
           isDisabled={(!isValid && submitted) || isSubmitting}
           isLoading={isSubmitting}

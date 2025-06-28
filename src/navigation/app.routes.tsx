@@ -7,15 +7,7 @@ import { AgendaScreen } from "@screens/App/Agenda";
 import { MetricsScreen } from "@screens/App/Metrics";
 import { HomeScreen } from "@screens/App/Home";
 import { ValidateReservations } from "@screens/App/ValidateReservations";
-
-export type AppTabStackParamList = {
-  TabRootStack: undefined;
-  ValidateReservations: undefined;
-  Home: undefined;
-  Agenda: undefined;
-  Metrics: undefined;
-  Adjustments: undefined;
-};
+import { AppTabStackParamList } from "./types";
 
 const Tab = createBottomTabNavigator<AppTabStackParamList>();
 const Stack = createNativeStackNavigator<AppTabStackParamList>();
