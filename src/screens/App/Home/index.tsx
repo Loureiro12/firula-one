@@ -6,6 +6,7 @@ import { UpcomingReservationsBox } from "./components/UpcomingReservationsBox";
 import { OccupationOfTheCourt } from "../Metrics/components/OccupationOfTheCourt";
 
 import { useHome } from "./hooks";
+import { AccountPendingAlert } from "./components/AccountPendingAlert";
 
 export const HomeScreen = () => {
   const { isLoading, handleNavigateToValidateReservations } = useHome();
@@ -18,6 +19,7 @@ export const HomeScreen = () => {
         rightIconOnPress: () => console.log("Settings Pressed"),
       }}
     >
+      <AccountPendingAlert />
       <DailySummaryCard
         cards={[
           {
@@ -33,10 +35,14 @@ export const HomeScreen = () => {
         ]}
         isLoading={isLoading}
       />
-      <ActionButtonsContainer 
+      <ActionButtonsContainer
         onValidateReservationsPress={handleNavigateToValidateReservations}
-        onCreateReservationPress={() => console.log("Create Reservation Pressed")}
-        onManageReservationsPress={() => console.log("Manage Reservations Pressed")}
+        onCreateReservationPress={() =>
+          console.log("Create Reservation Pressed")
+        }
+        onManageReservationsPress={() =>
+          console.log("Manage Reservations Pressed")
+        }
       />
       <UpcomingReservationsBox isLoading={isLoading} />
     </ContentPageTemplate>

@@ -2,9 +2,9 @@ import { Text, View } from "react-native";
 
 import { Card } from "@components/atoms";
 import { ICardProps } from "@components/atoms/Card/types";
+import { Skeleton } from "@components/molecules";
 
 import { styles } from "./styles";
-import { Skeleton } from "@components/molecules";
 import { IUpcomingReservationsBoxProps } from "./types";
 
 const mockReservations: ICardProps[] = [

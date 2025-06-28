@@ -1,7 +1,7 @@
-import { AppTabStackParamList } from "@navigation/app.routes";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AppTabStackParamList } from "@navigation/types";
 
 export const useHome = () => {
   const navigation =

@@ -1,7 +1,9 @@
 import { Text, View } from "react-native";
+
+import { Skeleton } from "@components/molecules";
+
 import { styles } from "./styles";
 import { IDailySummaryCardProps } from "./types";
-import { Skeleton } from "@components/molecules";
 
 export const DailySummaryCard = ({
   cards,
