@@ -5,9 +5,11 @@ import { ProfileEditActions } from "./components/ProfileEditActions";
 import { styles } from "./styles";
 import { UserHeader } from "./components/UserHeader";
 import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
+import { useAdjustments } from "./hooks";
 
 export const AdjustmentsScreen = () => {
   const { logout } = useAuthStore();
+  const {handleNavigationToEditProfile, user} = useAdjustments();
 
   const handleLogout = async () => {
     await logout();
@@ -21,9 +23,9 @@ export const AdjustmentsScreen = () => {
       }}
     >
       <UserHeader
-        name="João da Silva"
+        name={user?.name || "Usuário"}
         role="Dono de Quadra"
-        onEditProfile={() => console.log("Edit Profile Pressed")}
+        onEditProfile={handleNavigationToEditProfile}
       />
 
       <View style={styles.contentProfileEditActions}>

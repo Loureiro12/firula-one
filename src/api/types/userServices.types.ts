@@ -6,3 +6,8 @@ export interface IGetUserStatusResponse {
     routeName: string;
   }[];
 }
+
+export interface IUpdateUserProfileRequest {
+  name: string;
+  phone: string;
+}

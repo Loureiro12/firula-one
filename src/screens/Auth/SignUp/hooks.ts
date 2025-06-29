@@ -18,7 +18,6 @@ export const useSignUp = () => {
     control,
     handleSubmit,
     formState: { errors, isValid },
-    setError,
     reset,
   } = useForm<FormData>({
     mode: "onBlur",

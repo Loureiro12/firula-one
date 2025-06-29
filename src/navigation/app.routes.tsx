@@ -9,6 +9,7 @@ import { HomeScreen } from "@screens/App/Home";
 import { ValidateReservations } from "@screens/App/ValidateReservations";
 import { AppTabStackParamList } from "./types";
 import { PendingProfileScreen } from "@screens/App/PendingProfile";
+import { EditProfileScreen } from "@screens/App/EditProfile";
 
 const Tab = createBottomTabNavigator<AppTabStackParamList>();
 const Stack = createNativeStackNavigator<AppTabStackParamList>();
@@ -41,9 +42,21 @@ function TabRootStack() {
       initialRouteName="Home"
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Agenda" component={AgendaScreen} />
-      <Tab.Screen name="Metrics" component={MetricsScreen} />
-      <Tab.Screen name="Adjustments" component={AdjustmentsScreen} />
+      {/* <Tab.Screen name="Agenda" component={AgendaScreen} /> */}
+      {/* <Tab.Screen
+        name="Metrics"
+        component={MetricsScreen}
+        options={{
+          tabBarLabel: "Metricas",
+        }}
+      /> */}
+      <Tab.Screen
+        name="Adjustments"
+        component={AdjustmentsScreen}
+        options={{
+          tabBarLabel: "Ajustes",
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -65,7 +78,11 @@ export default function AppRootStack() {
           animation: "slide_from_right",
         }}
       />
-      <Stack.Screen name="PendingProfileScreen" component={PendingProfileScreen}  />
+      <Stack.Screen
+        name="PendingProfileScreen"
+        component={PendingProfileScreen}
+      />
+      <Stack.Screen name="EditProfile" component={EditProfileScreen} />
     </Stack.Navigator>
   );
 }

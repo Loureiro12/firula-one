@@ -13,6 +13,7 @@ export type AppTabStackParamList = {
   Metrics: undefined;
   Adjustments: undefined;
   PendingProfileScreen: undefined;
+  EditProfile: undefined;
 };
 
 export type RootStackParamList = {

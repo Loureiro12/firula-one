@@ -3,6 +3,8 @@ import { persist, PersistOptions } from 'zustand/middleware';
 import { AuthService } from '../api/authService';
 import { storage } from '../utils/storage';
 import { AuthState, AuthResponse, RegisterData, LoginData, AuthError, User } from '../types/auth';
+import { UserService } from 'src/api/userService';
+import { IUpdateUserProfileRequest } from 'src/api/types/userServices.types';
 
 type ExtendedAuthState = AuthState & {
   isAuthenticated: boolean;
@@ -10,6 +12,7 @@ type ExtendedAuthState = AuthState & {
 
 type AuthActions = {
   register: (userData: RegisterData) => Promise<void>;
+  updateUser: (userData: IUpdateUserProfileRequest) => Promise<void>;
   login: (credentials: LoginData) => Promise<void>;
   logout: () => void;
   refreshSession: () => Promise<void>;
@@ -43,6 +46,31 @@ const store: StateCreator<AuthStore> = (set, get) => ({
         refreshToken: data.refreshToken,
         user: data.user,
         isAuthenticated: true,
+        isLoading: false,
+      });
+    } catch (error) {
+      const err = error as AuthError;
+      set({ 
+        error: { 
+          message: err.message, 
+          code: err.code, 
+          status: err.status 
+        },
+        isLoading: false,
+      });
+      throw error;
+    }
+  },
+
+  updateUser: async (userData) => {
+    const { user } = get();
+    if (!user) throw new Error('Usuário não autenticado');
+
+    set({ isLoading: true, error: null });
+    try {
+      await UserService.updateUserProfile(user.id, userData);
+      set({ 
+        user: { ...user, ...userData },
         isLoading: false,
       });
     } catch (error) {
@@ -177,6 +205,7 @@ const persistOptions: PersistOptions<AuthStore> = {
     hydrate: state.hydrate,
     initialize: state.initialize,
     setToken: state.setToken,
+    updateUser: state.updateUser,
   }),
   version: 1,
 };
