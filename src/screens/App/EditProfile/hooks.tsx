@@ -10,11 +10,12 @@ import { useAuthStore } from "src/store/authStore";
 
 import { FormData } from "./types";
 import { removeMask } from "src/utils/function";
+import { UserService } from "src/api/userService";
 
 export const useEditProfile = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AppTabStackParamList>>();
-  const { user, updateUser } = useAuthStore();
+  const { user, updateUser, logout } = useAuthStore();
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -87,6 +88,31 @@ export const useEditProfile = () => {
     }
   };
 
+  const deleteAccount = async () => {
+    await UserService.deleteAccount(user?.id || "");
+    await logout();
+  };
+
+  const handleDeleteAccount = async () => {
+    Alert.alert(
+      "Excluir conta",
+      "Você tem certeza que deseja excluir sua conta?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Deletar",
+          style: "destructive",
+          onPress: () => {
+            deleteAccount();
+          },
+        },
+      ]
+    );
+  };
+
   return {
     handleGoBack,
     control,
@@ -95,6 +121,7 @@ export const useEditProfile = () => {
     isValid,
     submitted,
     isSubmitting: submitted,
-    hasChanges, // Adicionamos esta propriedade
+    hasChanges,
+    handleDeleteAccount,
   };
 };

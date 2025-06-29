@@ -37,4 +37,12 @@ export const UserService = {
       throw handleError(error) as AuthError;
     }
   },
+
+  async deleteAccount(userId: string): Promise<void> {
+    try {
+      await apiClient.patch(`/users/deactivate-account?userId=${userId}`);
+    } catch (error) {
+      throw handleError(error);
+    }
+  }
 };

@@ -21,6 +21,7 @@ export const EditProfileScreen = () => {
     submitted,
     isSubmitting,
     hasChanges,
+    handleDeleteAccount
   } = useEditProfile();
 
   return (
@@ -204,7 +205,7 @@ export const EditProfileScreen = () => {
           isLoading={isSubmitting}
         />
 
-        <TouchableOpacity activeOpacity={0.7} onPress={handleGoBack}>
+        <TouchableOpacity activeOpacity={0.7} onPress={handleDeleteAccount}>
           <Text style={styles.textDeleteAccount}>
             {locales.form.buttons.deleteAccount}
           </Text>
