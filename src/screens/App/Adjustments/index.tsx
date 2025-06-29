@@ -1,5 +1,10 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { useAuthStore } from "src/store/authStore";
+import { ProfileEditActions } from "./components/ProfileEditActions";
+
+import { styles } from "./styles";
+import { UserHeader } from "./components/UserHeader";
+import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
 
 export const AdjustmentsScreen = () => {
   const { logout } = useAuthStore();
@@ -9,29 +14,72 @@ export const AdjustmentsScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text
-        style={{
-          fontSize: 24,
-          fontWeight: "bold",
-          textAlign: "center",
-          marginVertical: 20,
-        }}
-      >
-        Adjustments
-      </Text>
+    <ContentPageTemplate
+      isScrollable
+      headerProps={{
+        title: "Ajustes",
+      }}
+    >
+      <UserHeader
+        name="João da Silva"
+        role="Dono de Quadra"
+        onEditProfile={() => console.log("Edit Profile Pressed")}
+      />
 
-      <TouchableOpacity onPress={handleLogout}>
-        <Text
-          style={{
-            fontSize: 18,
-            color: "#007BFF",
-            textDecorationLine: "underline",
-          }}
-        >
-          Sair
-        </Text>
-      </TouchableOpacity>
-    </View>
+      <View style={styles.contentProfileEditActions}>
+        <ProfileEditActions
+          title="Conta e Quadra"
+          item={[
+            {
+              label: "Dados da Quadra",
+              iconName: "person-outline",
+              // routeName: "ProfileEdit",
+            },
+            {
+              label: "Notificações",
+              iconName: "folder-outline",
+              // routeName: "UserEdit",
+            },
+          ]}
+        />
+
+        <ProfileEditActions
+          title="Acesso e Segurança"
+          item={[
+            {
+              label: "Alterar Senha",
+              iconName: "lock-closed-outline",
+              // routeName: "ProfileEdit",
+            },
+            {
+              label: "Segurança do App",
+              iconName: "shield-checkmark-outline",
+              // routeName: "UserEdit",
+            },
+          ]}
+        />
+
+        <ProfileEditActions
+          title="Ajuda e Suporte"
+          item={[
+            {
+              label: "Central de Ajuda",
+              iconName: "help-circle-outline",
+              // routeName: "ProfileEdit",
+            },
+            {
+              label: "Fale com o Suporte",
+              iconName: "chatbubble-ellipses-outline",
+              // routeName: "UserEdit",
+            },
+            {
+              label: "Sair da conta",
+              iconName: "log-out-outline",
+              function: handleLogout,
+            },
+          ]}
+        />
+      </View>
+    </ContentPageTemplate>
   );
 };
