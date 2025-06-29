@@ -3,7 +3,6 @@ import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
 import { DailySummaryCard } from "./components/DailySummaryCard";
 import { ActionButtonsContainer } from "./components/ActionButtonsContainer";
 import { UpcomingReservationsBox } from "./components/UpcomingReservationsBox";
-import { OccupationOfTheCourt } from "../Metrics/components/OccupationOfTheCourt";
 
 import { useHome } from "./hooks";
 import { AccountPendingAlert } from "./components/AccountPendingAlert";
@@ -13,6 +12,7 @@ export const HomeScreen = () => {
     isLoading,
     handleNavigateToValidateReservations,
     handleNavigateToPendingProfile,
+    hasProfileIssues,
   } = useHome();
   return (
     <ContentPageTemplate
@@ -23,7 +23,10 @@ export const HomeScreen = () => {
         rightIconOnPress: () => console.log("Settings Pressed"),
       }}
     >
-      <AccountPendingAlert onPress={handleNavigateToPendingProfile} />
+      {hasProfileIssues && !isLoading && (
+        <AccountPendingAlert onPress={handleNavigateToPendingProfile} />
+      )}
+
       <DailySummaryCard
         cards={[
           {

@@ -1,3 +1,5 @@
+import { AuthError } from "src/types/auth";
+
 export const isValidCPF = (cpf: string): boolean => {
   cpf = cpf.replace(/[^\d]+/g, "");
   if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) return false;
@@ -16,4 +18,17 @@ export const isValidCPF = (cpf: string): boolean => {
 
 export const removeMask = (value: string): string => {
   return value.replace(/\D/g, '')
+}
+
+export const handleError = (error: any): AuthError => {
+  if (error.response) {
+    return {
+      message: error.response.data?.message || "Erro desconhecido",
+      code: error.response.data?.code,
+      status: error.response.status,
+    };
+  }
+  return {
+    message: error.message || "Erro de conexão",
+  };
 }
