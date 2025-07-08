@@ -10,6 +10,7 @@ import { ValidateReservations } from "@screens/App/ValidateReservations";
 import { AppTabStackParamList } from "./types";
 import { PendingProfileScreen } from "@screens/App/PendingProfile";
 import { EditProfileScreen } from "@screens/App/EditProfile";
+import { CompanyScreen } from "@screens/App/Company";
 
 const Tab = createBottomTabNavigator<AppTabStackParamList>();
 const Stack = createNativeStackNavigator<AppTabStackParamList>();
@@ -83,6 +84,7 @@ export default function AppRootStack() {
         component={PendingProfileScreen}
       />
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+      <Stack.Screen name="Company" component={CompanyScreen} />
     </Stack.Navigator>
   );
 }

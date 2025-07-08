@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
       flex: 1,
       paddingBottom: theme.spacing[10],
       paddingHorizontal: theme.spacing[5],
-      backgroundColor: theme.colors.neutral["100"],
     },
     scrollContent: {
       flexGrow: 1,

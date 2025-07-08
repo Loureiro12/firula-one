@@ -33,7 +33,12 @@ export const AdjustmentsScreen = () => {
           title="Conta e Quadra"
           item={[
             {
-              label: "Dados da Quadra",
+              label: "Empresa",
+              iconName: "business-outline",
+              routeName: "Company",
+            },
+            {
+              label: "Quadras",
               iconName: "person-outline",
               // routeName: "ProfileEdit",
             },
