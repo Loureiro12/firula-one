@@ -9,7 +9,8 @@ import { CardCompany } from "./components/CardCompany";
 import { styles } from "./styles";
 
 export const CompanyScreen = () => {
-  const { handleGoBack } = useCompany();
+  const { handleGoBack, handleAddNewCompany } = useCompany();
+
   return (
     <ContentPageTemplate
       isScrollable
@@ -21,7 +22,7 @@ export const CompanyScreen = () => {
       <View style={styles.container}>
         <CardCompany />
         <View style={styles.containerButton}>
-          <Button label="Cadastrar empresa" iconName="add-sharp" />
+          <Button label="Cadastrar empresa" iconName="add-sharp" onPress={handleAddNewCompany} />
         </View>
       </View>
     </ContentPageTemplate>

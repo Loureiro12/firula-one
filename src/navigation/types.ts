@@ -15,6 +15,7 @@ export type AppTabStackParamList = {
   PendingProfileScreen: undefined;
   EditProfile: undefined;
   Company: undefined;
+  CreateCompany: undefined;
 };
 
 export type RootStackParamList = {

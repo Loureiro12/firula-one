@@ -12,7 +12,12 @@ export const useCompany = () => {
     navigation.goBack();
   };
 
+  const handleAddNewCompany = () => {
+    navigation.navigate("CreateCompany");
+  };
+
   return {
-    handleGoBack
+    handleGoBack,
+    handleAddNewCompany,
   };
 };

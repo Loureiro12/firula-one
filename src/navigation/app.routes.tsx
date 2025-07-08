@@ -11,6 +11,7 @@ import { AppTabStackParamList } from "./types";
 import { PendingProfileScreen } from "@screens/App/PendingProfile";
 import { EditProfileScreen } from "@screens/App/EditProfile";
 import { CompanyScreen } from "@screens/App/Company";
+import { CreateCompanyScreen } from "@screens/App/Company/createCompany";
 
 const Tab = createBottomTabNavigator<AppTabStackParamList>();
 const Stack = createNativeStackNavigator<AppTabStackParamList>();
@@ -85,6 +86,7 @@ export default function AppRootStack() {
       />
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       <Stack.Screen name="Company" component={CompanyScreen} />
+      <Stack.Screen name="CreateCompany" component={CreateCompanyScreen} />
     </Stack.Navigator>
   );
 }
