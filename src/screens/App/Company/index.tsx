@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 import { Button } from "@components/atoms";
 import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
@@ -9,7 +9,7 @@ import { CardCompany } from "./components/CardCompany";
 import { styles } from "./styles";
 
 export const CompanyScreen = () => {
-  const { handleGoBack, handleAddNewCompany } = useCompany();
+  const { handleGoBack, handleAddNewCompany, companyData } = useCompany();
 
   return (
     <ContentPageTemplate
@@ -20,9 +20,22 @@ export const CompanyScreen = () => {
       }}
     >
       <View style={styles.container}>
-        <CardCompany />
+        {companyData &&
+          companyData.length > 0 &&
+          companyData.map((company) => (
+            <CardCompany
+              key={company.id}
+              cnpj={company.cpf_cnpj}
+              name={company.name}
+              status={company.status}
+            />
+          ))}
         <View style={styles.containerButton}>
-          <Button label="Cadastrar empresa" iconName="add-sharp" onPress={handleAddNewCompany} />
+          <Button
+            label="Cadastrar empresa"
+            iconName="add-sharp"
+            onPress={handleAddNewCompany}
+          />
         </View>
       </View>
     </ContentPageTemplate>

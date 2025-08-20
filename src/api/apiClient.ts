@@ -9,7 +9,7 @@ declare module "axios" {
 }
 
 const apiClient: AxiosInstance = axios.create({
-  baseURL: "http://192.168.100.169:3333",
+  baseURL: "http://192.168.100.199:3333",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

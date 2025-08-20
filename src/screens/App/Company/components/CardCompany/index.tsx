@@ -8,22 +8,23 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { theme } from "@styles/theme";
 
 import { styles } from "./styles";
+import { ICreateCompany } from "./types";
 
-export const CardCompany = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
+export const CardCompany = ({ cnpj, name, status }: ICreateCompany) => {
+  const [isEnabled, setIsEnabled] = useState(status === "ACTIVE");
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View>
-          <Text style={styles.companyName}>Fael Futvolei</Text>
+          <Text style={styles.companyName}>{name}</Text>
           <View style={styles.contentLocation}>
             <Ionicons
-              name="location-outline"
+              name="business-outline"
               size={18}
               color={theme.colors.gray.gray03}
             />
-            <Text style={styles.textLocation}>São Paulo, SP</Text>
+            <Text style={styles.textLocation}>{cnpj}</Text>
           </View>
         </View>
         <View>
@@ -36,9 +37,13 @@ export const CardCompany = () => {
       </View>
 
       <View style={styles.containerCompanyStatus}>
-        <Text>Quadra ativa</Text>
+        {status === "ACTIVE" ? (
+          <Text>Empresa ativa</Text>
+        ) : (
+          <Text>Empresa inativa</Text>
+        )}
+
         <Switch
-          // size={20}
           value={isEnabled}
           onChange={(value) => setIsEnabled(value)}
           activeTrackColor={theme.colors.primary[100]}
