@@ -34,7 +34,6 @@ export const useHome = () => {
       }
 
     } catch (error) {
-      console.log("#######error", error);
     } finally {
       setIsLoading(false);
     }

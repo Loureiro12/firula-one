@@ -152,17 +152,17 @@ export const SignUpScreen = () => {
 
           <Controller
             control={control}
-            rules={{
-              required: locales.form.document.errorRequired,
-              pattern: {
-                value: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
-                message: locales.form.document.errorPattern,
-              },
-              validate: {
-                validCpf: (value) =>
-                  isValidCPF(value) || locales.form.document.errorInvalid,
-              },
-            }}
+            // rules={{
+            //   required: locales.form.document.errorRequired,
+            //   pattern: {
+            //     value: /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
+            //     message: locales.form.document.errorPattern,
+            //   },
+            //   validate: {
+            //     validCpf: (value) =>
+            //       isValidCPF(value) || locales.form.document.errorInvalid,
+            //   },
+            // }}
             render={({ field: { onChange, onBlur, value } }) => (
               <Input
                 label={locales.form.document.label}
@@ -173,12 +173,7 @@ export const SignUpScreen = () => {
                 returnKeyType="next"
                 onBlur={onBlur}
                 onChangeText={(text) => {
-                  const formattedText = text
-                    .replace(/\D/g, "")
-                    .replace(/(\d{3})(\d)/, "$1.$2")
-                    .replace(/(\d{3})(\d)/, "$1.$2")
-                    .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-                  onChange(formattedText);
+                  onChange(text);
                 }}
                 value={value}
                 maxLength={14}
@@ -239,9 +234,7 @@ export const SignUpScreen = () => {
         </View>
         <Button
           label={locales.form.buttons.signUp}
-          onPress={() => {
-            handleSubmit();
-          }}
+          onPress={() => handleSubmit(onSubmit)()}
           isDisabled={(!isValid && submitted) || isSubmitting}
           isLoading={isSubmitting}
         />

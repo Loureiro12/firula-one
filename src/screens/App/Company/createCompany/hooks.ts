@@ -1,4 +1,3 @@
-// src/screens/CreateCompanyScreen/hooks.ts
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -7,6 +6,8 @@ import { Alert } from "react-native";
 import { AppTabStackParamList } from "@navigation/types";
 import { CompanyService } from "src/api/companyService";
 import { useAuthStore } from "src/store/authStore";
+import { uploadImage } from "src/utils/function";
+import * as ImagePicker from "expo-image-picker";
 
 type FormData = {
   cnpj: string;
@@ -16,6 +17,7 @@ type FormData = {
   openingDate: string;
   phone: string;
   description: string;
+  imageUrl: string;
 };
 
 export const useCreateCompany = () => {
@@ -24,6 +26,21 @@ export const useCreateCompany = () => {
   const { user } = useAuthStore();
 
   const [submitted, setSubmitted] = useState(false);
+
+  const [imageUri, setImageUri] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handlePickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      setImageUri(result.assets[0].uri);
+    }
+  };
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -51,6 +68,21 @@ export const useCreateCompany = () => {
     try {
       setSubmitted(true);
 
+      let imageCompanyUrl = "";
+
+      if (imageUri) {
+        try {
+          imageCompanyUrl = await uploadImage(data.tradeName, imageUri);
+          console.log("Image uploaded successfully, URL:", imageCompanyUrl);
+        } catch (error) {
+          console.error("Erro ao fazer upload da imagem:", error);
+          Alert.alert(
+            "Aviso",
+            "Erro ao fazer upload da imagem. A empresa será criada sem imagem."
+          );
+        }
+      }
+
       const sendData = {
         name: data.tradeName,
         cpfCnpj: data.cnpj.replace(/\D/g, ""),
@@ -59,12 +91,15 @@ export const useCreateCompany = () => {
         corporate_reason: data.corporateName,
         regime: data.regime,
         opening_date: data.openingDate.replace(/\D/g, ""),
-        imageUrl: "",
+        imageUrl: imageCompanyUrl,
         description: data.description,
         typeDocument: "CNPJ",
       };
 
       const response = await CompanyService.create(user?.id || "", sendData);
+
+      setSubmitted(false);
+      // return; // Remover esta linha quando descomentar a API
 
       if (response.message) {
         Alert.alert("Sucesso", response.message);
@@ -92,8 +127,11 @@ export const useCreateCompany = () => {
     isValid,
     isSubmitting,
     submitted,
-    setSubmitted,
     onSubmit,
     handleGoBack,
+    handlePickImage,
+    imageUri,
+    uploading,
+    setUploading,
   };
 };

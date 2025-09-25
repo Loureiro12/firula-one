@@ -1,4 +1,6 @@
 import { AuthError } from "src/types/auth";
+import { getUrlImage, GetUrlImageType } from "src/api/getUrlImage";
+import * as FileSystem from "expo-file-system";
 
 export const isValidCPF = (cpf: string): boolean => {
   cpf = cpf.replace(/[^\d]+/g, "");
@@ -32,3 +34,54 @@ export const handleError = (error: any): AuthError => {
     message: error.message || "Erro de conexão",
   };
 }
+
+export const uploadImage = async (
+  imageName: string,
+  imageUri: string
+): Promise<string> => {
+  try {
+    const responseImage: GetUrlImageType = (await getUrlImage(
+      imageName.toLowerCase().replace(/\s/g, '') + '_company',
+    )) as GetUrlImageType;
+
+
+    const imageUrl = responseImage.url;
+
+    // Detectar o tipo correto da imagem pela extensão
+    const extension = imageUri.toLowerCase().split('.').pop();
+    let contentType = 'image/jpeg'; // fallback
+    
+    switch (extension) {
+      case 'jpg':
+      case 'jpeg':
+        contentType = 'image/jpeg';
+        break;
+      case 'png':
+        contentType = 'image/png';
+        break;
+      case 'gif':
+        contentType = 'image/gif';
+        break;
+      case 'webp':
+        contentType = 'image/webp';
+        break;
+    }
+
+    const uploadResult = await FileSystem.uploadAsync(responseImage.signedUrl, imageUri, {
+      httpMethod: 'PUT',
+      headers: {
+        'Content-Type': contentType,
+      },
+    });
+
+
+    if (uploadResult.status !== 200 && uploadResult.status !== 201) {
+      throw new Error(`Upload failed with status: ${uploadResult.status}`);
+    }
+
+    return imageUrl;
+  } catch (error) {
+    console.error('Erro detalhado no upload:', error);
+    throw new Error('Erro ao fazer upload da imagem');
+  }
+};

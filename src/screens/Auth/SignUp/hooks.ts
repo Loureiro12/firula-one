@@ -58,7 +58,9 @@ export const useSignUp = () => {
         "Erro no cadastro",
         error.message || "Ocorreu um erro ao realizar o cadastro"
       );
-    } finally {
+       setSubmitted(true);
+    }
+    finally {
       setSubmitted(false);
     }
   };
@@ -70,7 +72,7 @@ export const useSignUp = () => {
   return {
     control,
     errors,
-    handleSubmit: handleSubmit(onSubmit),
+    handleSubmit,
     isSubmitting: isLoading || submitted,
     isValid,
     onSubmit,

@@ -1,4 +1,7 @@
-import { View } from "react-native";
+import { View, Image, TouchableOpacity, Text } from "react-native";
+
+import { getUrlImage } from "src/api/getUrlImage";
+import axios from "axios";
 import { Controller } from "react-hook-form";
 
 import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
@@ -8,8 +11,10 @@ import { Button, Input } from "@components/atoms";
 
 import { useCreateCompany } from "./hooks";
 import { locales } from "./locales";
+import { styles } from "./styles";
 
 export const CreateCompanyScreen = () => {
+ 
   const {
     control,
     handleSubmit,
@@ -19,6 +24,10 @@ export const CreateCompanyScreen = () => {
     handleGoBack,
     isSubmitting,
     isValid,
+    handlePickImage,
+    imageUri,
+    uploading,
+    setUploading
   } = useCreateCompany();
 
   return (
@@ -31,7 +40,31 @@ export const CreateCompanyScreen = () => {
     >
       <Flag label="Certifique que os dados da sua empresa estão corretos, pois pode causar problemas no futuro." />
 
-      <View style={{ gap: 16 }}>
+      <View style={styles.formContainer}>
+        {/* Campo opcional para imagem da empresa */}
+        <TouchableOpacity
+          onPress={handlePickImage}
+          style={styles.imagePickerContainer}
+        >
+          {imageUri ? (
+            <Image
+              source={{ uri: imageUri }}
+              style={styles.selectedImage}
+            />
+          ) : (
+            <View style={styles.imagePlaceholder}>
+              <TouchableOpacity 
+                onPress={handlePickImage} 
+                style={styles.imagePickerButton} 
+                activeOpacity={0.7}
+              >
+                <Text style={styles.imagePickerText}>
+                  Adicione a logo da empresa (opcional)
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </TouchableOpacity>
         <Controller
           control={control}
           rules={{
@@ -254,11 +287,11 @@ export const CreateCompanyScreen = () => {
         />
 
         <Button
-          label="Cadastrar Empresa"
+          label={uploading ? "Enviando imagem..." : "Cadastrar Empresa"}
           onPress={handleSubmit(onSubmit)}
-          isLoading={isSubmitting}
-          isDisabled={!isValid}
-          style={{ marginTop: 24 }}
+          isLoading={isSubmitting || uploading}
+          isDisabled={!isValid || uploading}
+          style={styles.submitButton}
         />
       </View>
     </ContentPageTemplate>

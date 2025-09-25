@@ -15,6 +15,7 @@ export const PendingProfileScreen = () => {
     hasProfileIssues,
     error,
     loadAccountStatus,
+    handleNavigation
   } = usePendingProfile();
 
   return (
@@ -51,6 +52,7 @@ export const PendingProfileScreen = () => {
                     key={issue.routeName}
                     title={issue.title}
                     description={issue.description}
+                    onPress={() => handleNavigation(issue.routeName)}
                   />
                 ))
               ) : (

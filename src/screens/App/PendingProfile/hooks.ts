@@ -21,6 +21,10 @@ export const usePendingProfile = () => {
     navigation.goBack();
   };
 
+  const handleNavigation = (routeName: string) => {
+    navigation.navigate(routeName);
+  };
+
   const loadAccountStatus = async () => {
     try {
       setLoadingData(true);
@@ -57,5 +61,6 @@ export const usePendingProfile = () => {
     hasProfileIssues,
     error,
     loadAccountStatus,
+    handleNavigation
   };
 };
