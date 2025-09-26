@@ -232,12 +232,18 @@ export const SignUpScreen = () => {
             name="confirmPassword"
           />
         </View>
-        <Button
-          label={locales.form.buttons.signUp}
-          onPress={() => handleSubmit(onSubmit)()}
-          isDisabled={(!isValid && submitted) || isSubmitting}
-          isLoading={isSubmitting}
-        />
+        <View
+          style={{
+            width: "100%",
+          }}
+        >
+          <Button
+            label={locales.form.buttons.signUp}
+            onPress={() => handleSubmit(onSubmit)()}
+            isDisabled={(!isValid && submitted) || isSubmitting}
+            isLoading={isSubmitting}
+          />
+        </View>
       </View>
 
       <View style={styles.footer}>

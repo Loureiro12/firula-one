@@ -5,6 +5,7 @@ import {
   IGetUserStatusResponse,
   IUpdateUserProfileRequest,
 } from "./types/userServices.types";
+import { IGetUserByIdResponse } from "./types/userService";
 
 export const UserService = {
   async getUserStatus(userId: string): Promise<IGetUserStatusResponse> {
@@ -44,5 +45,16 @@ export const UserService = {
     } catch (error) {
       throw handleError(error);
     }
-  }
+  },
+
+  async getUserById(userId: string): Promise<IGetUserByIdResponse> {
+    try {
+      const response = await apiClient.get<IGetUserByIdResponse>(
+        `/users?userId=${userId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
 };

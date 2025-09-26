@@ -47,3 +47,22 @@ export interface IGetCompanyResponse {
 export interface IGetCompanysResponse {
   company: ICompany[];
 }
+
+interface IAddressData {
+  street: string;
+  number: string;
+  complement: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  zipCode: string;
+}
+
+export interface ICompanyAddressRequest {
+  companyId: string;
+  addressData: IAddressData;
+}
+
+export interface ICompanyAddressResponse {
+  addressId: string;
+}

@@ -1,6 +1,8 @@
 import apiClient from "./apiClient";
 import { handleError } from "src/utils/function";
 import {
+  ICompanyAddressRequest,
+  ICompanyAddressResponse,
   ICreateCompanyRequest,
   IGetCompanyResponse,
   IGetCompanysResponse,
@@ -22,9 +24,7 @@ export const CompanyService = {
     }
   },
 
-  async getByUserId(
-    userId: string
-  ): Promise<IGetCompanysResponse | null> {
+  async getByUserId(userId: string): Promise<IGetCompanysResponse | null> {
     try {
       const response = await apiClient.get<IGetCompanysResponse>(
         `/company/userId?userId=${userId}`
@@ -33,5 +33,20 @@ export const CompanyService = {
     } catch (error) {
       throw handleError(error);
     }
-  }
+  },
+
+  async addNewCompanyAddress({
+    companyId,
+    addressData,
+  }: ICompanyAddressRequest): Promise<ICompanyAddressResponse | null> {
+    try {
+      const response = await apiClient.post<ICompanyAddressResponse>(
+        `company-address?companyId=${companyId}`,
+        addressData
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
 };

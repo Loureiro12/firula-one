@@ -8,6 +8,7 @@ import { CompanyService } from "src/api/companyService";
 import { useAuthStore } from "src/store/authStore";
 import { uploadImage } from "src/utils/function";
 import * as ImagePicker from "expo-image-picker";
+import { useCompanyStore } from "src/store";
 
 type FormData = {
   cnpj: string;
@@ -24,6 +25,7 @@ export const useCreateCompany = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AppTabStackParamList>>();
   const { user } = useAuthStore();
+  const { setCompanyId } = useCompanyStore();
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -102,6 +104,7 @@ export const useCreateCompany = () => {
       // return; // Remover esta linha quando descomentar a API
 
       if (response.message) {
+        setCompanyId(response.companyId);
         Alert.alert("Sucesso", response.message);
       } else {
         Alert.alert("Sucesso", "Empresa cadastrada com sucesso!");

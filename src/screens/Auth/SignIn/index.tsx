@@ -82,15 +82,22 @@ export default function SignInScreen() {
             name="password"
           />
         </View>
-        <Button
-          label="Entrar"
-          onPress={() => {
-            setSubmitted(true);
-            handleSubmit(onSubmit)();
+        <View
+          style={{
+            width: "100%",
+            height: 56,
           }}
-          isDisabled={(!isValid && submitted) || isSubmitting}
-          isLoading={isSubmitting}
-        />
+        >
+          <Button
+            label="Entrar"
+            onPress={() => {
+              setSubmitted(true);
+              handleSubmit(onSubmit)();
+            }}
+            isDisabled={(!isValid && submitted) || isSubmitting}
+            isLoading={isSubmitting}
+          />
+        </View>
       </View>
 
       <View style={styles.footer}>

@@ -14,6 +14,7 @@ type ExtendedAuthState = AuthState & {
 type AuthActions = {
   register: (userData: RegisterData) => Promise<void>;
   updateUser: (userData: IUpdateUserProfileRequest) => Promise<void>;
+  setUser: (user: User) => void;
   login: (credentials: LoginData) => Promise<void>;
   logout: () => void;
   refreshSession: () => Promise<void>;
@@ -21,7 +22,6 @@ type AuthActions = {
   hydrate: () => Promise<void>;
   initialize: () => Promise<void>;
   setToken: (token: string) => void;
-
 };
 
 type AuthStore = ExtendedAuthState & AuthActions;
@@ -86,6 +86,10 @@ const store: StateCreator<AuthStore> = (set, get) => ({
       });
       throw error;
     }
+  },
+
+  setUser: (user: User) => {
+    set({ user });
   },
 
   login: async (credentials) => {
@@ -207,6 +211,7 @@ const persistOptions: PersistOptions<AuthStore> = {
     initialize: state.initialize,
     setToken: state.setToken,
     updateUser: state.updateUser,
+    setUser: state.setUser,
   }),
   version: 1,
 };

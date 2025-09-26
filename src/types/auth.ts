@@ -10,6 +10,8 @@ export interface AuthResponse {
   userId: string;
 }
 
+import { ICompany } from '../api/types/companyService.types';
+
 export interface User {
   id: string;
   name: string;
@@ -26,6 +28,7 @@ export interface User {
   emergencyContactPhone: string | null;
   createdAt: string;
   updatedAt: string;
+  Company?: ICompany[];
 }
 
 export interface RegisterData {

@@ -6,13 +6,11 @@ import { UserService } from "src/api/userService";
 import { useAuthStore } from "src/store/authStore";
 import { IGetUserStatusResponse } from "src/api/types/userServices.types";
 import { Alert } from "react-native";
-import { useBottomDrawer } from "src/hooks";
 
 export const usePendingProfile = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AppTabStackParamList>>();
   const { user } = useAuthStore();
-  const { showBottomDrawer } = useBottomDrawer();
 
   const [loadingData, setLoadingData] = useState(true);
   const [hasProfileIssues, setHasProfileIssues] =
@@ -24,29 +22,14 @@ export const usePendingProfile = () => {
   };
 
   const handleNavigation = (routeName: string) => {
-    showBottomDrawer({
-      title: "Título Personalizado",
-      description: "Descrição do modal aqui",
-      actions: [
-        {
-          label: "Cancelar",
-          onPress: () => console.log("Cancelado"),
-          variante: "secondary",
-        },
-        {
-          label: "Confirmar",
-          onPress: () => console.log("Confirmado"),
-          variante: "primary",
-          iconName: "checkmark",
-        },
-      ],
-    });
-    // navigation.navigate(routeName);
+    navigation.navigate(routeName);
   };
 
   const loadAccountStatus = async () => {
     try {
       setLoadingData(true);
+
+      console.log('#### user?.id',  user?.id);
 
       const responseLoadAccountStatus = await UserService.getUserStatus(
         user?.id ?? ""

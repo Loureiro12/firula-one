@@ -16,6 +16,7 @@ export type AppTabStackParamList = {
   EditProfile: undefined;
   Company: undefined;
   CreateCompany: undefined;
+  AddNewCompanyAddress: undefined;
 };
 
 export type RootStackParamList = {
