@@ -11,28 +11,77 @@ export const Button = ({
   isDisabled,
   isLoading,
   testIDPrefix,
+  variante = "primary",
   ...rest
 }: IButtonProps) => {
+  const getContainerStyle = () => {
+    if (variante === "primary") {
+      return [
+        styles.container,
+        styles.primaryContainer,
+        {
+          backgroundColor: isDisabled || isLoading 
+            ? theme.colors.primary["200"] 
+            : theme.colors.primary["100"],
+        },
+      ];
+    } else {
+      return [
+        styles.container,
+        styles.secondaryContainer,
+        (isDisabled || isLoading) && {
+          borderColor: theme.colors.primary["200"],
+          backgroundColor: theme.colors.neutral[50],
+        },
+      ];
+    }
+  };
+
+  const getLabelStyle = () => {
+    if (variante === "primary") {
+      return styles.primaryLabel;
+    } else {
+      return [
+        styles.secondaryLabel,
+        (isDisabled || isLoading) && { color: theme.colors.primary["200"] }
+      ];
+    }
+  };
+
+  const getIconColor = () => {
+    if (variante === "primary") {
+      return "white";
+    } else {
+      return isDisabled || isLoading 
+        ? theme.colors.primary["200"] 
+        : theme.colors.primary["100"];
+    }
+  };
+
+  const getActivityIndicatorColor = () => {
+    if (variante === "primary") {
+      return "white";
+    } else {
+      return theme.colors.primary["100"];
+    }
+  };
+
   return (
     <Pressable
       {...rest}
-      style={[
-        styles.container,
-        {
-          backgroundColor:
-            isDisabled || isLoading
-              ? theme.colors.primary["200"]
-              : theme.colors.primary["100"],
-        },
-      ]}
+      style={getContainerStyle()}
       disabled={isDisabled}
       testID={`${testIDPrefix}-button`}
     >
-      <Ionicons name={iconName} size={24} color="white" />
+      <Ionicons name={iconName} size={24} color={getIconColor()} />
       {isLoading ? (
-        <ActivityIndicator size="small" color="white" animating={isLoading} />
+        <ActivityIndicator 
+          size="small" 
+          color={getActivityIndicatorColor()} 
+          animating={isLoading} 
+        />
       ) : (
-        <Text style={styles.label}>{label}</Text>
+        <Text style={getLabelStyle()}>{label}</Text>
       )}
     </Pressable>
   );

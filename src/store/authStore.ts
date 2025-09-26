@@ -1,6 +1,7 @@
 import { create, StateCreator } from 'zustand';
 import { persist, PersistOptions } from 'zustand/middleware';
 import { AuthService } from '../api/authService';
+import { configureTokenManager } from '../api/apiClient';
 import { storage } from '../utils/storage';
 import { AuthState, AuthResponse, RegisterData, LoginData, AuthError, User } from '../types/auth';
 import { UserService } from 'src/api/userService';
@@ -213,6 +214,14 @@ const persistOptions: PersistOptions<AuthStore> = {
 export const useAuthStore = create<AuthStore>()(
   persist(store, persistOptions)
 );
+
+// Configure apiClient with token management functions
+configureTokenManager({
+  getToken: () => useAuthStore.getState().token,
+  getRefreshToken: () => useAuthStore.getState().refreshToken,
+  setToken: (token: string) => useAuthStore.getState().setToken(token),
+  logout: () => useAuthStore.getState().logout(),
+});
 
 export type AuthStoreSelectors = {
   useToken: () => string | null;

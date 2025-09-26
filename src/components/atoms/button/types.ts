@@ -8,4 +8,5 @@ export interface IButtonProps extends Omit<PressableProps, 'onPress'> {
   isDisabled?: boolean;
   isLoading?: boolean;
   onPress?: (...args: any[]) => void;
+  variante?: 'primary' | 'secondary';
 }

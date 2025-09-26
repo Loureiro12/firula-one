@@ -29,12 +29,15 @@ export const useHome = () => {
         user?.id ?? ""
       );
 
+      console.log('responseLoadAccountStatus', responseLoadAccountStatus)
+
       if (responseLoadAccountStatus.pendingData.length > 0) {
         setHasProfileIssues(true)
       }
+      setIsLoading(false);
 
     } catch (error) {
-    } finally {
+      console.log('error', error)
       setIsLoading(false);
     }
   };

@@ -1,12 +1,14 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from "axios";
 import { AuthState } from "../types/auth";
-import { useAuthStore } from "src/store/authStore";
+import { TokenManager } from "./types/tokenManager";
 
 declare module "axios" {
   interface AxiosRequestConfig {
     _retry?: boolean;
   }
 }
+
+let tokenManager: TokenManager | null = null;
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: "http://192.168.100.230:3333",
@@ -16,10 +18,15 @@ const apiClient: AxiosInstance = axios.create({
   },
 });
 
+// Function to configure token management
+export const configureTokenManager = (manager: TokenManager) => {
+  tokenManager = manager;
+};
+
 // Interceptor para adicionar token
 apiClient.interceptors.request.use(
   (config) => {
-    const { token } = useAuthStore.getState();
+    const token = tokenManager?.getToken();
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -37,12 +44,13 @@ apiClient.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       originalRequest &&
-      !originalRequest._retry
+      !originalRequest._retry &&
+      tokenManager
     ) {
       originalRequest._retry = true;
 
       try {
-        const { refreshToken, setToken } = useAuthStore.getState();
+        const refreshToken = tokenManager.getRefreshToken();
         if (!refreshToken) throw new Error("No refresh token available");
 
         const response = await axios.post<Pick<AuthState, "token">>(
@@ -52,7 +60,7 @@ apiClient.interceptors.response.use(
 
         const newToken = response.data.token;
         if (!newToken) throw new Error("No token returned from refresh");
-        setToken(newToken);
+        tokenManager.setToken(newToken);
 
         if (originalRequest.headers) {
           originalRequest.headers.Authorization = `Bearer ${newToken}`;
@@ -60,7 +68,7 @@ apiClient.interceptors.response.use(
 
         return apiClient(originalRequest);
       } catch (refreshError) {
-        useAuthStore.getState().logout();
+        tokenManager.logout();
         return Promise.reject(refreshError);
       }
     }

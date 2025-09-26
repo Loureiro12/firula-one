@@ -1,5 +1,5 @@
 import apiClient from "./apiClient";
-import { AuthError, AuthResponse, RegisterData } from "../types/auth";
+import { AuthError, AuthResponse } from "../types/auth";
 import { handleError } from "src/utils/function";
 import {
   IGetUserStatusResponse,
