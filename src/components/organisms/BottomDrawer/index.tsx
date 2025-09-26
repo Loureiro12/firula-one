@@ -35,6 +35,13 @@ export function BottomDrawer({
   ];
 
   const buttonsToRender = actions.length > 0 ? actions : defaultActions;
+
+  // Função para executar a ação e fechar o modal automaticamente
+  const handleActionPress = (actionOnPress: () => void) => {
+    actionOnPress(); // Executa a função da tela
+    onClose(); // Fecha o modal automaticamente
+  };
+
   return (
     <Modal transparent visible={isVisible} animationType="slide">
       <View style={styles.overlay}>
@@ -48,9 +55,9 @@ export function BottomDrawer({
                 <TouchableOpacity
                   activeOpacity={0.7}
                   style={styles.handle}
+                  onPress={onClose}
                 />
               </View>
-
               <View style={styles.content}>
                 <Text style={styles.title}>
                   {title}
@@ -64,7 +71,7 @@ export function BottomDrawer({
                     <Button 
                       key={index}
                       label={action.label}
-                      onPress={action.onPress}
+                      onPress={() => handleActionPress(action.onPress)}
                       variante={action.variante || "primary"}
                       iconName={action.iconName}
                       isDisabled={action.isDisabled}
@@ -79,4 +86,4 @@ export function BottomDrawer({
       </View>
     </Modal>
   );
-}
+};

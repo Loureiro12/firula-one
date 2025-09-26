@@ -1,6 +1,13 @@
 import * as React from "react";
 import RootStack from "./navigation";
+import { BottomDrawerProvider } from "./hooks";
 
 export function App() {
-  return <RootStack />;
+  return (
+    <>
+      <BottomDrawerProvider>
+        <RootStack />
+      </BottomDrawerProvider>
+    </>
+  );
 }
