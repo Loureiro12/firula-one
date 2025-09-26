@@ -3,15 +3,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { AdjustmentsScreen } from "@screens/App/Adjustments";
-import { AgendaScreen } from "@screens/App/Agenda";
-import { MetricsScreen } from "@screens/App/Metrics";
 import { HomeScreen } from "@screens/App/Home";
 import { ValidateReservations } from "@screens/App/ValidateReservations";
 import { AppTabStackParamList } from "./types";
 import { PendingProfileScreen } from "@screens/App/PendingProfile";
 import { EditProfileScreen } from "@screens/App/EditProfile";
-import { CompanyScreen } from "@screens/App/Company";
-import { CreateCompanyScreen } from "@screens/App/Company/createCompany";
+import { CreateCompanyScreen } from "@screens/App/Company/screens/createCompany";
+import { CompanyScreen } from "@screens/App/Company/screens/listCompany";
 
 const Tab = createBottomTabNavigator<AppTabStackParamList>();
 const Stack = createNativeStackNavigator<AppTabStackParamList>();

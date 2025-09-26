@@ -4,9 +4,9 @@ import { Button } from "@components/atoms";
 import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
 
 import { useCompany } from "./hooks";
-import { CardCompany } from "./components/CardCompany";
 
 import { styles } from "./styles";
+import { CardCompany } from "../../components/CardCompany";
 
 export const CompanyScreen = () => {
   const { handleGoBack, handleAddNewCompany, companyData } = useCompany();
