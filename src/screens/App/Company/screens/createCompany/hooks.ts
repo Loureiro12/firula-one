@@ -26,6 +26,8 @@ export const useCreateCompany = () => {
     useNavigation<NativeStackNavigationProp<AppTabStackParamList>>();
   const { user } = useAuthStore();
   const { setCompanyId } = useCompanyStore();
+    const { companyId } = useCompanyStore();
+
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -74,8 +76,11 @@ export const useCreateCompany = () => {
 
       if (imageUri) {
         try {
-          imageCompanyUrl = await uploadImage(data.tradeName, imageUri);
-          console.log("Image uploaded successfully, URL:", imageCompanyUrl);
+          imageCompanyUrl = await uploadImage(
+            data.tradeName,
+            imageUri,
+            "_company"
+          );
         } catch (error) {
           console.error("Erro ao fazer upload da imagem:", error);
           Alert.alert(
@@ -100,18 +105,32 @@ export const useCreateCompany = () => {
 
       const response = await CompanyService.create(user?.id || "", sendData);
 
-      setSubmitted(false);
-      // return; // Remover esta linha quando descomentar a API
-
-      if (response.message) {
+      if (response.companyId) {
         setCompanyId(response.companyId);
-        Alert.alert("Sucesso", response.message);
+        
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        const successMessage = response.message || "Empresa cadastrada com sucesso!";
+        
+        Alert.alert(
+          "Sucesso", 
+          successMessage,
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                setSubmitted(false);
+                reset();
+                setImageUri(null);
+                console.log('🔄 Navegando de volta para PendingProfile...');
+                navigation.goBack();
+              }
+            }
+          ]
+        );
       } else {
-        Alert.alert("Sucesso", "Empresa cadastrada com sucesso!");
+        Alert.alert("Erro", "Não foi possível obter o ID da empresa criada.");
       }
-
-      reset();
-      navigation.goBack();
     } catch (error: any) {
       console.error("Error during company creation:", error);
       Alert.alert(

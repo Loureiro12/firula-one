@@ -95,8 +95,6 @@ export const useAddNewCompanyAddress = () => {
         zipCode: data.zipCode.replace(/[^0-9]/g, ""),
       };
 
-      console.log('companyId', companyId);
-
       await CompanyService.addNewCompanyAddress({
         companyId: companyId ?? "",
         addressData,

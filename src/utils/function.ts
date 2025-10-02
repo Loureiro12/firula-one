@@ -37,11 +37,12 @@ export const handleError = (error: any): AuthError => {
 
 export const uploadImage = async (
   imageName: string,
-  imageUri: string
+  imageUri: string,
+  name: string,
 ): Promise<string> => {
   try {
     const responseImage: GetUrlImageType = (await getUrlImage(
-      imageName.toLowerCase().replace(/\s/g, '') + '_company',
+      imageName.toLowerCase().replace(/\s/g, '') + name,
     )) as GetUrlImageType;
 
 

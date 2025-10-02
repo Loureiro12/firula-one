@@ -11,7 +11,7 @@ declare module "axios" {
 let tokenManager: TokenManager | null = null;
 
 const apiClient: AxiosInstance = axios.create({
-  baseURL: "http://192.168.100.230:3333",
+  baseURL: "http://localhost:3333",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

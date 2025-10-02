@@ -49,4 +49,6 @@ export const CompanyService = {
       throw handleError(error);
     }
   },
+
+  
 };

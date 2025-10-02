@@ -1,13 +1,10 @@
-import { View, Image, TouchableOpacity, Text } from "react-native";
-
-import { getUrlImage } from "src/api/getUrlImage";
-import axios from "axios";
+import { View } from "react-native";
 import { Controller } from "react-hook-form";
 
 import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
-
 import { Flag } from "@components/atoms/flag";
 import { Button, Input } from "@components/atoms";
+import { ImagePicker } from "src/components/molecules/ImagePicker/ImagePicker";
 
 import { useCreateCompany } from "./hooks";
 import { locales } from "./locales";
@@ -41,30 +38,16 @@ export const CreateCompanyScreen = () => {
       <Flag label="Certifique que os dados da sua empresa estão corretos, pois pode causar problemas no futuro." />
 
       <View style={styles.formContainer}>
-        {/* Campo opcional para imagem da empresa */}
-        <TouchableOpacity
-          onPress={handlePickImage}
-          style={styles.imagePickerContainer}
-        >
-          {imageUri ? (
-            <Image
-              source={{ uri: imageUri }}
-              style={styles.selectedImage}
-            />
-          ) : (
-            <View style={styles.imagePlaceholder}>
-              <TouchableOpacity 
-                onPress={handlePickImage} 
-                style={styles.imagePickerButton} 
-                activeOpacity={0.7}
-              >
-                <Text style={styles.imagePickerText}>
-                  Adicione a logo da empresa (opcional)
-                </Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </TouchableOpacity>
+        {/* Componente ImagePicker reutilizável */}
+        <ImagePicker
+          label="Logo da Empresa"
+          placeholder="Adicione a logo da empresa (opcional)"
+          overlayText="Alterar Logo"
+          overlaySubtext="Toque para escolher outra imagem"
+          onImageSelect={handlePickImage}
+          imageUri={imageUri}
+          loading={uploading}
+        />
         <Controller
           control={control}
           rules={{

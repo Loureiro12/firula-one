@@ -31,6 +31,12 @@
           "image": "./assets/splash-icon.png"
         }
       ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Esse app precisa acessar suas fotos para que você possa enviar imagens."
+        }
+      ],
       "react-native-edge-to-edge",
       "expo-localization"
     ]

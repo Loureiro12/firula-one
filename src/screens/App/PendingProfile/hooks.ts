@@ -1,9 +1,10 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AppTabStackParamList } from "@navigation/types";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { UserService } from "src/api/userService";
 import { useAuthStore } from "src/store/authStore";
+import { useCompanyStore } from "src/store/companyStore";
 import { IGetUserStatusResponse } from "src/api/types/userServices.types";
 import { Alert } from "react-native";
 
@@ -11,6 +12,7 @@ export const usePendingProfile = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AppTabStackParamList>>();
   const { user } = useAuthStore();
+  const { companyId } = useCompanyStore();
 
   const [loadingData, setLoadingData] = useState(true);
   const [hasProfileIssues, setHasProfileIssues] =
@@ -22,14 +24,15 @@ export const usePendingProfile = () => {
   };
 
   const handleNavigation = (routeName: string) => {
-    navigation.navigate(routeName);
+    // Fazer cast para o tipo correto - a API retorna string
+    navigation.navigate(routeName as keyof AppTabStackParamList);
+    // TO_DO: remover quando finalizar conexão com backend
+    // navigation.navigate('CreateNewCourt')
   };
 
   const loadAccountStatus = async () => {
     try {
       setLoadingData(true);
-
-      console.log('#### user?.id',  user?.id);
 
       const responseLoadAccountStatus = await UserService.getUserStatus(
         user?.id ?? ""
@@ -56,6 +59,13 @@ export const usePendingProfile = () => {
       loadAccountStatus();
     }, [])
   );
+
+  // Recarrega quando o companyId muda
+  useEffect(() => {
+    if (companyId) {
+      loadAccountStatus();
+    }
+  }, [companyId]);
 
   return {
     handleGoBack,

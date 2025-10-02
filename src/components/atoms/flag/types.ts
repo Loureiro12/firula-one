@@ -1,3 +1,5 @@
 export interface IFlag {
-  label: string;
+  title?: string;
+  label?: string;
+  topics?: string[];
 }

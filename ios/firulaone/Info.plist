@@ -53,6 +53,10 @@
 	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>SplashScreen</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Esse app precisa acessar suas fotos para que você possa enviar imagens.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Esse app precisa acessar sua câmera para que você possa tirar fotos e enviá-las</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
