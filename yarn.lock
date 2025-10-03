@@ -5344,6 +5344,11 @@ react-native-switch-toggles@^1.0.1:
   dependencies:
     react-native-redash "*"
 
+react-native-timer-picker@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-timer-picker/-/react-native-timer-picker-2.2.0.tgz#4a8b0656d3d8b8b951e1fa0e4ada31dcac4012ea"
+  integrity sha512-TvWGXx+WCvx00sP5/WfUZnuUus7Jbsi585aT5PfwKEkWikKI/ntlYZFiZJBG8TPPaFXvwAU9EO5JdOimzhUHWQ==
+
 react-native-web@^0.20.0:
   version "0.20.0"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.20.0.tgz#3fb0591999ed4b54d7822a2785547415e8a5c031"
