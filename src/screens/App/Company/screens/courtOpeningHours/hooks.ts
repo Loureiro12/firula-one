@@ -1,18 +1,27 @@
 import { useState, useCallback } from "react";
 import { Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AppTabStackParamList } from "@navigation/types";
 import { useOpeningHoursForm } from "../../../../../hooks/useOpeningHoursForm";
 import { openingHoursLocales } from "./locales";
+import { BlockService } from "src/api/blockService";
+import { IOpeningHoursType } from "src/api/types/blockService.types";
 
 interface UseCourtOpeningHoursOptions {
   companyBlockId?: string;
 }
 
-export const useCourtOpeningHours = (options: UseCourtOpeningHoursOptions = {}) => {
+export const useCourtOpeningHours = (
+  options: UseCourtOpeningHoursOptions = {}
+) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AppTabStackParamList>>();
+
+  // Pegar parâmetros da rota usando o tipo correto
+  const route =
+    useRoute<RouteProp<AppTabStackParamList, "CourtOpeningHours">>();
+  const routeCompanyBlockId = route.params.companyBlockId;
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -32,7 +41,7 @@ export const useCourtOpeningHours = (options: UseCourtOpeningHoursOptions = {}) 
   // Mapear números dos dias para nomes em inglês
   const dayOfWeekMap = {
     0: "sunday",
-    1: "monday", 
+    1: "monday",
     2: "tuesday",
     3: "wednesday",
     4: "thursday",
@@ -43,46 +52,62 @@ export const useCourtOpeningHours = (options: UseCourtOpeningHoursOptions = {}) 
   // Função para converter valor monetário mascarado para centavos
   const convertPriceToNumber = (price: string): string => {
     if (!price) return "";
-    
+
     // Remove tudo que não é dígito ou vírgula/ponto
-    const cleaned = price.replace(/[^\d,\.]/g, '');
+    const cleaned = price.replace(/[^\d,\.]/g, "");
     // Substitui vírgula por ponto para parseFloat
-    const normalized = cleaned.replace(',', '.');
+    const normalized = cleaned.replace(",", ".");
     const value = parseFloat(normalized) || 0;
-    
+
     // Converte para centavos (multiplica por 100)
     return Math.round(value * 100).toString();
   };
 
   // Função para transformar os dados no formato da API
   const transformSchedulesToAPI = () => {
-    const openingHours: any[] = [];
+    const openingHours: IOpeningHoursType[] = [];
 
     schedules.forEach((schedule) => {
       if (!schedule.isOpen || schedule.timeSlots.length === 0) return;
 
       schedule.timeSlots.forEach((timeSlot) => {
         // Pular slots inválidos
-        if (!timeSlot.startHour || !timeSlot.startMinute || 
-            !timeSlot.endHour || !timeSlot.endMinute) return;
+        if (
+          !timeSlot.startHour ||
+          !timeSlot.startMinute ||
+          !timeSlot.endHour ||
+          !timeSlot.endMinute
+        )
+          return;
 
-        const startTime = `${timeSlot.startHour.padStart(2, '0')}:${timeSlot.startMinute.padStart(2, '0')}`;
-        const endTime = `${timeSlot.endHour.padStart(2, '0')}:${timeSlot.endMinute.padStart(2, '0')}`;
+        const startTime = `${timeSlot.startHour.padStart(
+          2,
+          "0"
+        )}:${timeSlot.startMinute.padStart(2, "0")}`;
+        const endTime = `${timeSlot.endHour.padStart(
+          2,
+          "0"
+        )}:${timeSlot.endMinute.padStart(2, "0")}`;
 
         openingHours.push({
-          dayOfWeek: dayOfWeekMap[schedule.dayOfWeek as keyof typeof dayOfWeekMap],
+          dayOfWeek:
+            dayOfWeekMap[schedule.dayOfWeek as keyof typeof dayOfWeekMap],
           startTime,
           endTime,
           active: true,
-          valueForHourDayUse: timeSlot.dayUse ? convertPriceToNumber(timeSlot.dayUsePrice) : "",
+          valueForHourDayUse: timeSlot.dayUse
+            ? convertPriceToNumber(timeSlot.dayUsePrice)
+            : "",
           dayUseActive: timeSlot.dayUse,
-          priceForHour: timeSlot.dayUse ? "" : convertPriceToNumber(timeSlot.price),
+          priceForHour: timeSlot.dayUse
+            ? ""
+            : convertPriceToNumber(timeSlot.price),
         });
       });
     });
 
     return {
-      companyBlockId: options.companyBlockId || "d46cf714-008d-4a49-aaf9-28c9f4cc31f3", // Fallback se não fornecido
+      companyBlockId: routeCompanyBlockId || options.companyBlockId,
       openingHours,
     };
   };
@@ -107,15 +132,18 @@ export const useCourtOpeningHours = (options: UseCourtOpeningHoursOptions = {}) 
     setIsSaving(true);
 
     try {
-      // Transformar dados para o formato da API
       const apiData = transformSchedulesToAPI();
-      
-      console.log("Dados para enviar para API:", JSON.stringify(apiData, null, 2));
-      
-      // TODO: Implementar chamada para API
-      // await api.post('/opening-hours', apiData);
-      
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simular API call
+
+      if (!apiData.companyBlockId) {
+        Alert.alert("Erro", "O identificador do bloco da empresa é obrigatório.");
+        setIsSaving(false);
+        return;
+      }
+
+      await BlockService.createBlockOpeningHours({
+        ...apiData,
+        companyBlockId: apiData.companyBlockId as string,
+      });
 
       Alert.alert("Sucesso", openingHoursLocales.success.saved);
       handleGoBack();

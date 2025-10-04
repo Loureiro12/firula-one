@@ -11,6 +11,7 @@ import { BlockService } from "src/api/blockService";
 import { useCompanyStore } from "src/store/companyStore";
 import { ITypeBlock } from "src/api/types/blockService.types";
 import { uploadImage } from "src/utils/function";
+import { useBottomDrawer } from "src/hooks";
 
 interface CreateCourtFormData {
   name: string;
@@ -23,6 +24,7 @@ export const useCreateNewCourt = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AppTabStackParamList>>();
   const { companyId } = useCompanyStore();
+  const { showBottomDrawer } = useBottomDrawer();
 
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -188,7 +190,7 @@ export const useCreateNewCourt = () => {
 
       if (imageUri) {
         try {
-          imageBlockUrl = await uploadImage(imageUri, imageUri, '_block');
+          imageBlockUrl = await uploadImage(imageUri, imageUri, "_block");
         } catch (error) {
           console.error("Erro ao fazer upload da imagem:", error);
           Alert.alert(
@@ -209,17 +211,35 @@ export const useCreateNewCourt = () => {
 
       const response = await BlockService.createBlock(createBlockData);
 
-      Alert.alert("Sucesso!", "Quadra cadastrada com sucesso!", [
-        {
-          text: "OK",
-          onPress: () => {
-            reset();
-            setImageUri(null);
-            setSubmitted(false);
-            navigation.goBack();
+      showBottomDrawer({
+        title: "Quadra cadastrada!",
+        description:
+          "Sua quadra foi cadastrada com sucesso. Agora você pode definir os horários de funcionamento e o preço, ou se preferir, fazer isso mais tarde..",
+        actions: [
+          {
+            label: "Definir depois",
+            variante: "secondary",
+            onPress: () => {
+              reset();
+              setImageUri(null);
+              setSubmitted(false);
+              navigation.goBack();
+            },
           },
-        },
-      ]);
+          {
+            label: "Definir agora",
+
+            onPress: () => {
+              reset();
+              setImageUri(null);
+              setSubmitted(false);
+              navigation.navigate("CourtOpeningHours", {
+                companyBlockId: response.blockId,
+              });
+            },
+          },
+        ],
+      });
     } catch (error) {
       console.error("Erro ao cadastrar quadra:", error);
       Alert.alert(

@@ -25,9 +25,9 @@ export const usePendingProfile = () => {
 
   const handleNavigation = (routeName: string) => {
     // Fazer cast para o tipo correto - a API retorna string
-    // navigation.navigate(routeName as keyof AppTabStackParamList);
+    navigation.navigate(routeName as keyof AppTabStackParamList);
     // TO_DO: remover quando finalizar conexão com backend
-    navigation.navigate('CourtOpeningHours')
+    // navigation.navigate('CourtOpeningHours')
   };
 
   const loadAccountStatus = async () => {

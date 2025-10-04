@@ -18,7 +18,9 @@ export type AppTabStackParamList = {
   CreateCompany: undefined;
   AddNewCompanyAddress: undefined;
   CreateNewCourt: undefined;
-  CourtOpeningHours: undefined;
+  CourtOpeningHours: {
+    companyBlockId: string;
+  };
 };
 
 export type RootStackParamList = {

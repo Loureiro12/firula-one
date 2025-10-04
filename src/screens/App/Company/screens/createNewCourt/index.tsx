@@ -70,7 +70,7 @@ export const CreateNewCourtScreen = () => {
         />
 
         {/* Campo de valor por hora */}
-        <Controller
+        {/* <Controller
           control={control}
           rules={{
             required: locales.form.valueForHour.errorRequired,
@@ -96,7 +96,7 @@ export const CreateNewCourtScreen = () => {
             />
           )}
           name="valueForHour"
-        />
+        /> */}
 
         {/* Campo opcional para imagem da quadra */}
         <View style={styles.imagePickerContainer}>

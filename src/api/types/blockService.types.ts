@@ -21,3 +21,22 @@ export interface ICreateBlockRequest {
 export interface ICreateBlockResponse {
   blockId: string;
 }
+
+export interface IOpeningHoursType {
+  dayOfWeek: string;
+  startTime: string;
+  endTime: string;
+  active: boolean;
+  valueForHourDayUse: string;
+  dayUseActive: boolean;
+  priceForHour: string;
+}
+
+export interface ICreateBlockOpeningHoursRequest {
+  companyBlockId: string;
+  openingHours: IOpeningHoursType[];
+}
+
+export interface ICreateBlockOpeningHoursResponse {
+  success: boolean;
+}
