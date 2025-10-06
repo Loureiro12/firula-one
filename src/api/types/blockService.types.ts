@@ -40,3 +40,21 @@ export interface ICreateBlockOpeningHoursRequest {
 export interface ICreateBlockOpeningHoursResponse {
   success: boolean;
 }
+
+export interface IBlock {
+  id: string;
+  name: string;
+  valueForHour: string;
+  imageUrl: string;
+  isActive: boolean;
+  sports: string[];
+  createdAt: string;
+  updatedAt: string;
+  typeBlockId: string;
+  companyId: string;
+  maxUsersPerDayUse: string | null;
+}
+
+export interface IGetAllBlocksResponse {
+  block: IBlock[];
+}

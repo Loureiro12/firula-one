@@ -40,7 +40,7 @@ export const AdjustmentsScreen = () => {
             {
               label: "Quadras",
               iconName: "person-outline",
-              // routeName: "ProfileEdit",
+              routeName: "ListAllBlock",
             },
             {
               label: "Notificações",

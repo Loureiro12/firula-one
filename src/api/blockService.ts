@@ -1,6 +1,6 @@
 import apiClient from "./apiClient";
 import { handleError } from "src/utils/function";
-import { ICreateBlockOpeningHoursRequest, ICreateBlockOpeningHoursResponse, ICreateBlockRequest, ICreateBlockResponse, IGetTypeBlockResponse } from "./types/blockService.types";
+import { ICreateBlockOpeningHoursRequest, ICreateBlockOpeningHoursResponse, ICreateBlockRequest, ICreateBlockResponse, IGetAllBlocksResponse, IGetTypeBlockResponse } from "./types/blockService.types";
 
 export const BlockService = {
   async getTypeBlock(): Promise<IGetTypeBlockResponse> {
@@ -23,6 +23,15 @@ export const BlockService = {
     }
   },
 
+  async getAllBlocks(companyId: string): Promise<IGetAllBlocksResponse> {
+    try {
+      const response = await apiClient.get<IGetAllBlocksResponse>(`company-block/companyId?companyId=${companyId}`);
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
+
   async createBlockOpeningHours(data: ICreateBlockOpeningHoursRequest): Promise<ICreateBlockOpeningHoursResponse> {
     try {
       const response = await apiClient.post<ICreateBlockOpeningHoursResponse>("/company-block/opening-hours", data);
@@ -30,6 +39,8 @@ export const BlockService = {
     } catch (error) {
       throw handleError(error);
     }
-  }
+  },
+
+
   
 };

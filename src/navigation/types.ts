@@ -21,6 +21,7 @@ export type AppTabStackParamList = {
   CourtOpeningHours: {
     companyBlockId: string;
   };
+  ListAllBlock: undefined;
 };
 
 export type RootStackParamList = {
