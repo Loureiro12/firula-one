@@ -8,7 +8,6 @@ import { styles } from "./styles";
 interface BlockCardProps {
   block: IBlock;
   typeBlockName: string;
-  hasOpeningHours: boolean;
   onEdit: (blockId: string) => void;
   onConfigureHours: (companyBlockId: string) => void;
 }
@@ -16,14 +15,13 @@ interface BlockCardProps {
 export const BlockCard: React.FC<BlockCardProps> = ({
   block,
   typeBlockName,
-  hasOpeningHours,
   onEdit,
   onConfigureHours,
 }) => {
   const [imageError, setImageError] = useState(false);
 
   const handleConfigureHours = () => {
-    if (!hasOpeningHours) {
+    if (!block.hasOpeningHours) {
       Alert.alert(
         "Configurar Horários",
         "Esta quadra ainda não possui horários de funcionamento configurados. Deseja configurar agora?",
@@ -127,7 +125,7 @@ export const BlockCard: React.FC<BlockCardProps> = ({
         </View>
 
         {/* Alerta de horários não configurados */}
-        {!hasOpeningHours && (
+        {!block.hasOpeningHours && (
           <TouchableOpacity
             style={styles.warningAlert}
             onPress={handleConfigureHours}
@@ -147,7 +145,7 @@ export const BlockCard: React.FC<BlockCardProps> = ({
         )}
 
         {/* Botão de configurar horários - só aparece quando já tem horários configurados */}
-        {hasOpeningHours && (
+        {block.hasOpeningHours && (
           <TouchableOpacity
             style={styles.configureButtonConfigured}
             onPress={handleConfigureHours}

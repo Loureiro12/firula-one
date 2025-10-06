@@ -154,6 +154,12 @@ export const styles = StyleSheet.create({
   configureButtonConfigured: {
     backgroundColor: theme.colors.green[50],
     borderColor: theme.colors.green[100],
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: theme.spacing[3],
+    borderRadius: theme.radii.md,
+    gap: theme.spacing[2],
   },
 
   configureButtonText: {

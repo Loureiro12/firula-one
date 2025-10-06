@@ -53,8 +53,9 @@ export interface IBlock {
   typeBlockId: string;
   companyId: string;
   maxUsersPerDayUse: string | null;
+  hasOpeningHours: boolean;
 }
 
 export interface IGetAllBlocksResponse {
-  block: IBlock[];
+  blocks: IBlock[];
 }

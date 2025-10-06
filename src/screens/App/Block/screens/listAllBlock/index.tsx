@@ -9,52 +9,10 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ContentPageTemplate } from "@components/templates/ContentPageTemplate";
-import { Skeleton } from "@components/molecules";
 import { theme } from "../../../../../styles/theme";
 import { useListAllBlock } from "./hooks";
 import { BlockCard } from "./components/BlockCard";
-import { styles as blockCardStyles } from "./components/styles";
 import { styles } from "./styles";
-
-const SkeletonBlockCard = () => (
-  <View style={blockCardStyles.container}>
-    {/* Image skeleton */}
-    <View style={blockCardStyles.imageContainer}>
-      <Skeleton height={160} radius={8} isFullWidth />
-    </View>
-    
-    <View style={blockCardStyles.content}>
-      {/* Header skeleton */}
-      <View style={blockCardStyles.header}>
-        <View style={blockCardStyles.titleContainer}>
-          {/* Block name skeleton */}
-          <Skeleton height={24} width={180} radius={4} align="flex-start" />
-          {/* Block type skeleton */}
-          <View style={{ marginTop: 4 }}>
-            <Skeleton height={16} width={120} radius={4} align="flex-start" />
-          </View>
-        </View>
-        {/* Edit button skeleton */}
-        <Skeleton height={36} width={36} radius={6} />
-      </View>
-      
-      {/* Info items skeleton */}
-      <View style={blockCardStyles.infoContainer}>
-        {/* Location info */}
-        <View style={blockCardStyles.infoItem}>
-          <Skeleton height={16} width={200} radius={4} align="flex-start" />
-        </View>
-        {/* Price info */}
-        <View style={blockCardStyles.infoItem}>
-          <Skeleton height={16} width={150} radius={4} align="flex-start" />
-        </View>
-      </View>
-      
-      {/* Configure button skeleton */}
-      <Skeleton height={48} radius={6} isFullWidth />
-    </View>
-  </View>
-);
 
 export const ListAllBlockScreen = () => {
   const {
@@ -68,7 +26,6 @@ export const ListAllBlockScreen = () => {
     navigateToCourtOpeningHours,
     handleGoBack,
     getTypeBlockName,
-    hasOpeningHours,
     retry,
   } = useListAllBlock();
 
@@ -76,7 +33,6 @@ export const ListAllBlockScreen = () => {
     <BlockCard
       block={item}
       typeBlockName={getTypeBlockName(item.typeBlockId)}
-      hasOpeningHours={hasOpeningHours(item)}
       onEdit={navigateToEditCourt}
       onConfigureHours={navigateToCourtOpeningHours}
     />
@@ -142,7 +98,7 @@ export const ListAllBlockScreen = () => {
       return renderErrorState();
     }
 
-    if (blocks.length === 0) {
+    if (blocks && blocks.length === 0) {
       return renderEmptyState();
     }
 
