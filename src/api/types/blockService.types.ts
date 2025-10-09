@@ -59,3 +59,19 @@ export interface IBlock {
 export interface IGetAllBlocksResponse {
   blocks: IBlock[];
 }
+
+export interface IUpdateBlockRequest {
+  name: string;
+  sports: string[];
+  imageUrl: string;
+  typeBlockId: string;
+  isActive: boolean;
+}
+
+export interface IUpdateBlockResponse {
+  blockId: string;
+}
+
+export interface IGetBlockBySlugResponse {
+  block: IBlock;
+}

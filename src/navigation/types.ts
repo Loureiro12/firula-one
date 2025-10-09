@@ -22,6 +22,9 @@ export type AppTabStackParamList = {
     companyBlockId: string;
   };
   ListAllBlock: undefined;
+  UpdateBlock: {
+    blockId: string;
+  };
 };
 
 export type RootStackParamList = {

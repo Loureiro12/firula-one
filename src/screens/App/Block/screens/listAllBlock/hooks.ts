@@ -60,14 +60,11 @@ export const useListAllBlock = () => {
     navigation.navigate("CreateNewCourt");
   }, [navigation]);
 
-  const navigateToEditCourt = useCallback((courtId: string) => {
-    // TODO: Implementar quando a tela de edição estiver criada
-    console.log("Navigate to edit court:", courtId);
-    Alert.alert(
-      "Em breve",
-      "Funcionalidade de edição será implementada em breve."
-    );
-  }, []);
+  const navigateToEditCourt = useCallback((blockId: string) => {
+    navigation.navigate("UpdateBlock", {
+      blockId: blockId,
+    })
+  }, [navigation]);
 
   const navigateToCourtOpeningHours = useCallback(
     (companyBlockId: string) => {

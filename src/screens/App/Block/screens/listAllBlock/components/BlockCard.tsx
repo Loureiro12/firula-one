@@ -8,7 +8,7 @@ import { styles } from "./styles";
 interface BlockCardProps {
   block: IBlock;
   typeBlockName: string;
-  onEdit: (blockId: string) => void;
+  onEdit: (slug: string) => void;
   onConfigureHours: (companyBlockId: string) => void;
 }
 
