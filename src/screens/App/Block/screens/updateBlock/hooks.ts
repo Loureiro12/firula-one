@@ -30,7 +30,9 @@ export const useUpdateBlock = () => {
   const blockId = route.params?.blockId;
 
   const [imageUri, setImageUri] = useState<string | null>(null);
+  const [initialImageUrl, setInitialImageUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [imageChanged, setImageChanged] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [courtTypes, setCourtTypes] = useState<ITypeBlock[]>([]);
   const [loadingCourtTypes, setLoadingCourtTypes] = useState(true);
@@ -69,11 +71,11 @@ export const useUpdateBlock = () => {
         JSON.stringify(watchedData.sports) !== JSON.stringify(initialData.sports) ||
         watchedData.courtType !== initialData.courtType ||
         watchedData.isActive !== initialData.isActive ||
-        imageUri !== null; // Se mudou a imagem
+        imageChanged; // Se mudou a imagem
 
       setHasChanges(hasChanged);
     }
-  }, [watchedData, imageUri, initialData]);
+  }, [watchedData, imageUri, initialData, imageChanged]);
 
   // Opções para esportes (seleção múltipla)
   const sportsOptions: MultiSelectOption[] = [
@@ -126,8 +128,10 @@ export const useUpdateBlock = () => {
 
         // Se tem imagem, definir como inicial
         if (block.imageUrl) {
-          // Não definir imageUri pois representa mudança de imagem
-          // setImageUri(block.imageUrl);
+        // Definir preview da imagem existente (não marca como alteração)
+        const r2Base = "https://pub-ed847887b3d7415384bbf5488c674561.r2.dev/";
+        setInitialImageUrl(block.imageUrl);
+        setImageUri(`${r2Base}${block.imageUrl}`);
         }
       } catch (error) {
         console.error("Erro ao carregar dados da quadra:", error);
@@ -178,6 +182,27 @@ export const useUpdateBlock = () => {
         return;
       }
 
+      Alert.alert("Selecionar Imagem", "Escolha uma opção:", [
+        {
+          text: "Galeria",
+          onPress: () => pickImageFromGallery(),
+        },
+        {
+          text: "Câmera",
+          onPress: () => pickImageFromCamera(),
+        },
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+      ]);
+    } catch (error) {
+      console.error("Erro ao solicitar permissão:", error);
+    }
+  };
+
+  const pickImageFromGallery = async () => {
+    try {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
@@ -187,10 +212,40 @@ export const useUpdateBlock = () => {
 
       if (!result.canceled && result.assets[0]) {
         setImageUri(result.assets[0].uri);
+        setImageChanged(true);
       }
     } catch (error) {
-      console.error("Erro ao selecionar imagem:", error);
-      Alert.alert("Erro", "Erro ao selecionar imagem");
+      console.error("Erro ao selecionar imagem da galeria:", error);
+      Alert.alert("Erro", "Erro ao selecionar imagem da galeria");
+    }
+  };
+
+  const pickImageFromCamera = async () => {
+    try {
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+
+      if (status !== "granted") {
+        Alert.alert(
+          "Permissão necessária",
+          "Precisamos de acesso à sua câmera para tirar uma foto da quadra."
+        );
+        return;
+      }
+
+      const result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [16, 9],
+        quality: 0.8,
+      });
+
+      if (!result.canceled && result.assets[0]) {
+        setImageUri(result.assets[0].uri);
+        setImageChanged(true);
+      }
+    } catch (error) {
+      console.error("Erro ao tirar foto:", error);
+      Alert.alert("Erro", "Erro ao tirar foto");
     }
   };
 
@@ -215,27 +270,34 @@ export const useUpdateBlock = () => {
 
       let finalImageUrl = "";
 
-      // Fazer upload da nova imagem se foi selecionada
-      if (imageUri) {
-        setUploading(true);
-        try {
-          finalImageUrl = await uploadImage("quadra", imageUri, Date.now().toString());
-        } catch (uploadError) {
-          console.error("Erro no upload da imagem:", uploadError);
-          Alert.alert(
-            "Erro",
-            "Erro ao fazer upload da imagem. Tente novamente."
-          );
-          return;
-        } finally {
-          setUploading(false);
+      // Se a imagem foi alterada, fazer upload da nova imagem
+      if (imageChanged) {
+        // se imageUri for uma URL remota (inicial), isso significa que o usuário não selecionou uma nova imagem
+        // porém imageChanged só é definido true quando o usuário escolhe via picker/camera, então aqui assumimos upload
+        if (imageUri) {
+          setUploading(true);
+          try {
+            finalImageUrl = await uploadImage("quadra", imageUri, Date.now().toString());
+          } catch (uploadError) {
+            console.error("Erro no upload da imagem:", uploadError);
+            Alert.alert(
+              "Erro",
+              "Erro ao fazer upload da imagem. Tente novamente."
+            );
+            return;
+          } finally {
+            setUploading(false);
+          }
         }
+      } else {
+        // se não mudou, manter a imagem inicial (pode ser null)
+        finalImageUrl = initialImageUrl || "";
       }
 
       const updateData = {
         name: data.name,
         sports: data.sports,
-        imageUrl: finalImageUrl, // Se não mudou imagem, será string vazia
+        imageUrl: finalImageUrl,
         typeBlockId: data.courtType,
         isActive: data.isActive,
       };

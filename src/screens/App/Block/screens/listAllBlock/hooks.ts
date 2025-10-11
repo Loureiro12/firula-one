@@ -98,6 +98,19 @@ export const useListAllBlock = () => {
     loadData();
   }, [loadBlocks, loadTypeBlocks]);
 
+  // Refetch data whenever the screen comes into focus (e.g., after goBack or navigation)
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      // show loading while refetching
+      setIsLoading(true);
+      void Promise.all([loadBlocks(), loadTypeBlocks()]).finally(() => {
+        setIsLoading(false);
+      });
+    });
+
+    return unsubscribe;
+  }, [navigation, loadBlocks, loadTypeBlocks]);
+
   return {
     // Data
     blocks,

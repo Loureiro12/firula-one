@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   
   formContainer: {
     gap: 16,
+    marginBottom: 100
   },
   
   cepSection: {

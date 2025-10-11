@@ -25,7 +25,7 @@ export const BlockService = {
 
   async updateBlock(blockId: string, data: IUpdateBlockRequest): Promise<IUpdateBlockResponse> {
     try {
-      const response = await apiClient.patch<IUpdateBlockResponse>(`/company-block/${blockId}`, data);
+      const response = await apiClient.patch<IUpdateBlockResponse>(`/company-block?blockId=${blockId}`, data);
       return response.data;
     } catch (error) {
       throw handleError(error);
