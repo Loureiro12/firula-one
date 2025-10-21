@@ -16,6 +16,9 @@ export type AppTabStackParamList = {
   EditProfile: undefined;
   Company: undefined;
   CreateCompany: undefined;
+  UpdateCompany: {
+    companyId: string;
+  };
   AddNewCompanyAddress: undefined;
   CreateNewCourt: undefined;
   CourtOpeningHours: {

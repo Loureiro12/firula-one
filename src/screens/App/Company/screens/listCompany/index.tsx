@@ -7,9 +7,13 @@ import { useCompany } from "./hooks";
 
 import { styles } from "./styles";
 import { CardCompany } from "../../components/CardCompany";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AppTabStackParamList } from "@navigation/types";
 
 export const CompanyScreen = () => {
   const { handleGoBack, handleAddNewCompany, companyData } = useCompany();
+  const navigation = useNavigation<NativeStackNavigationProp<AppTabStackParamList>>();
 
   return (
     <ContentPageTemplate
@@ -28,15 +32,11 @@ export const CompanyScreen = () => {
               cnpj={company.cpf_cnpj}
               name={company.name}
               status={company.status}
+              mobilePhone={company.mobilePhone}
+              companyAddress={company.companyAddress[0]}
+              onPress={() => navigation.navigate("UpdateCompany", { companyId: company.id })}
             />
           ))}
-        <View style={styles.containerButton}>
-          <Button
-            label="Cadastrar empresa"
-            iconName="add-sharp"
-            onPress={handleAddNewCompany}
-          />
-        </View>
       </View>
     </ContentPageTemplate>
   );

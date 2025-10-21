@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 4,
+    flex: 1,
   },
   header: {
     flexDirection: "row",
@@ -26,20 +27,36 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     gap: theme.spacing[1],
     marginTop: theme.spacing[1],
+    flex: 1,
+    width: '100%',
   },
   companyName: {
     fontSize: theme.typography.fontSizes.base,
     fontWeight: theme.typography.fontWeights.bold,
     color: theme.colors.neutral[700],
+    marginBottom: theme.spacing[1],
   },
   textLocation: {
     fontSize: theme.typography.fontSizes.sm,
     color: theme.colors.gray.gray03,
   },
-  containerCompanyStatus: {
-    marginTop: theme.spacing[3],
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  }
+  textSmall: {
+    fontSize: theme.typography.fontSizes.xs,
+    color: theme.colors.neutral[500],
+    // flex: 1,
+  },
+  buttonSeeDetails: {
+    marginTop: theme.spacing[4],
+    alignSelf: "flex-start",
+    paddingVertical: theme.spacing[2],
+    paddingHorizontal: theme.spacing[4],
+    backgroundColor: theme.colors.primary[100],
+    borderRadius: theme.radii.lg,
+    width: '100%',
+    alignItems: 'center',
+  },
+  textButton: {
+    color: theme.colors.white,
+    fontWeight: theme.typography.fontWeights.medium,
+  },
 })

@@ -15,6 +15,7 @@ import { CreateNewCourtScreen } from "@screens/App/Company/screens/createNewCour
 import { CourtOpeningHoursScreen } from "@screens/App/Company/screens/courtOpeningHours";
 import { ListAllBlockScreen } from "@screens/App/Block/screens/listAllBlock";
 import { UpdateBlockScreen } from "@screens/App/Block/screens/updateBlock";
+import UpdateCompanyScreen from "@screens/App/Company/screens/updateCompany";
 
 const Tab = createBottomTabNavigator<AppTabStackParamList>();
 const Stack = createNativeStackNavigator<AppTabStackParamList>();
@@ -90,9 +91,16 @@ export default function AppRootStack() {
       <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       <Stack.Screen name="Company" component={CompanyScreen} />
       <Stack.Screen name="CreateCompany" component={CreateCompanyScreen} />
-      <Stack.Screen name="AddNewCompanyAddress" component={AddNewCompanyAddress} />
+      <Stack.Screen name="UpdateCompany" component={UpdateCompanyScreen} />
+      <Stack.Screen
+        name="AddNewCompanyAddress"
+        component={AddNewCompanyAddress}
+      />
       <Stack.Screen name="CreateNewCourt" component={CreateNewCourtScreen} />
-      <Stack.Screen name="CourtOpeningHours" component={CourtOpeningHoursScreen} />
+      <Stack.Screen
+        name="CourtOpeningHours"
+        component={CourtOpeningHoursScreen}
+      />
       <Stack.Screen name="ListAllBlock" component={ListAllBlockScreen} />
       <Stack.Screen name="UpdateBlock" component={UpdateBlockScreen} />
     </Stack.Navigator>

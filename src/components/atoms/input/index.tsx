@@ -2,6 +2,7 @@ import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { styles } from "./styles";
+import { theme } from "@styles/theme";
 import { IInputProps } from "./types";
 import { useState } from "react";
 
@@ -26,19 +27,19 @@ export const Input = ({
       }}
       testID={`${testIDPrefix}-input-container`}
     >
-      {label ? <Text style={styles.label}>{label}</Text> : null}
+      {label ? <Text style={[styles.label, isDisabled ? styles.labelDisabled : undefined]}>{label}</Text> : null}
       <View style={styles.content}>
         {iconLeft ? (
           <Ionicons
             name={iconLeft}
             size={24}
-            color="gray"
+            color={isDisabled ? theme.colors.neutral[400] : 'gray'}
             style={{ marginRight: 8 }}
           />
         ) : null}
         <TextInput
           {...rest}
-          style={styles.input}
+          style={[styles.input, isDisabled ? styles.inputDisabled : undefined]}
           secureTextEntry={showPassword && isPassword}
           editable={!isDisabled}
           testID="text-input"
@@ -53,7 +54,7 @@ export const Input = ({
             <Ionicons
               name={showPassword ? "eye-off-outline" : "eye-outline"}
               size={24}
-              color="gray"
+              color={isDisabled ? theme.colors.neutral[400] : 'gray'}
               style={{ marginLeft: 8 }}
               testID={
                 showPassword ? "icon-eye-off-outline" : "icon-eye-outline"

@@ -24,6 +24,7 @@ export interface ICompany {
   createdAt: string;
   updatedAt: string;
   userId: string;
+  companyAddress: IAddressData[];
 }
 
 export interface ICreateCompanyRequest {
@@ -48,7 +49,7 @@ export interface IGetCompanysResponse {
   company: ICompany[];
 }
 
-interface IAddressData {
+export interface IAddressData {
   street: string;
   number: string;
   complement: string;
@@ -65,4 +66,19 @@ export interface ICompanyAddressRequest {
 
 export interface ICompanyAddressResponse {
   addressId: string;
+}
+
+export interface IGetCompanyByIdResponse {
+  company: ICompany;
+}
+
+export interface IUpdateCompanyStatusRequest {
+  isActive?: boolean;
+  mobilePhone?: string;
+  imageUrl?: string;
+  description?: string;
+}
+
+export interface IUpdateCompanyResponse {
+  companyId: string;
 }

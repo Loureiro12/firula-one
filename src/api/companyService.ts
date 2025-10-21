@@ -4,8 +4,11 @@ import {
   ICompanyAddressRequest,
   ICompanyAddressResponse,
   ICreateCompanyRequest,
+  IGetCompanyByIdResponse,
   IGetCompanyResponse,
   IGetCompanysResponse,
+  IUpdateCompanyResponse,
+  IUpdateCompanyStatusRequest,
 } from "./types/companyService.types";
 
 export const CompanyService = {
@@ -50,5 +53,33 @@ export const CompanyService = {
     }
   },
 
-  
+  async getCompanyById(
+    companyId: string
+  ): Promise<IGetCompanyByIdResponse | null> {
+    try {
+      const response = await apiClient.get<IGetCompanyByIdResponse>(
+        `/company/companyId?companyId=${companyId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
+
+  async updateCompany(
+    companyId: string,
+    data: IUpdateCompanyStatusRequest
+  ): Promise<IUpdateCompanyResponse> {
+    try {
+      const response = await apiClient.patch<IUpdateCompanyResponse>(
+        `/company?companyId=${companyId}`,
+        {
+          ...data,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
 };

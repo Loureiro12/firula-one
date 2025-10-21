@@ -11,15 +11,25 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  contentDisabled: {
+    backgroundColor: theme.colors.neutral[50],
+    borderColor: theme.colors.neutral[200],
+  },
   input: {
     flex: 1,
     height: "100%",
+  },
+  inputDisabled: {
+    color: theme.colors.neutral[500],
   },
   label: {
     fontSize: theme.typography.fontSizes.sm,
     fontWeight: theme.typography.fontWeights.regular,
     color: theme.colors.neutral[900],
     marginBottom: theme.spacing[2.5],
+  },
+  labelDisabled: {
+    color: theme.colors.neutral[500],
   },
   errorText: {
     color: theme.colors.error,

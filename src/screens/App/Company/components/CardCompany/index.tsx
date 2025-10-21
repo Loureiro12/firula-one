@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 
-import { Text, View } from "react-native";
-
-import Switch from "react-native-switch-toggles";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { MaskedText } from "@components/atoms/MaskedText";
 
 import { theme } from "@styles/theme";
 
 import { styles } from "./styles";
 import { ICreateCompany } from "./types";
 
-export const CardCompany = ({ cnpj, name, status }: ICreateCompany) => {
-  const [isEnabled, setIsEnabled] = useState(status === "ACTIVE");
-
+export const CardCompany = ({
+  cnpj,
+  name,
+  mobilePhone,
+  companyAddress,
+  ...rest
+}: ICreateCompany) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.8} {...rest}>
       <View style={styles.header}>
-        <View>
+        <View style={{ flex: 1 }}>
           <Text style={styles.companyName}>{name}</Text>
           <View style={styles.contentLocation}>
             <Ionicons
@@ -24,31 +26,46 @@ export const CardCompany = ({ cnpj, name, status }: ICreateCompany) => {
               size={18}
               color={theme.colors.gray.gray03}
             />
-            <Text style={styles.textLocation}>{cnpj}</Text>
+            <MaskedText type="cnpj" value={cnpj} style={styles.textLocation} />
           </View>
-        </View>
-        <View>
-          <Ionicons
-            name="create-outline"
-            size={24}
-            color={theme.colors.gray.gray03}
-          />
+          {companyAddress?.street && (
+            <View style={styles.contentLocation}>
+              <Ionicons
+                name="location-outline"
+                size={16}
+                color={theme.colors.gray.gray04}
+              />
+              <Text style={styles.textSmall}>
+                {companyAddress.street}, {companyAddress.number},{" "}
+                {companyAddress.neighborhood}
+              </Text>
+            </View>
+          )}
+
+          {mobilePhone && (
+            <View style={styles.contentLocation}>
+              <Ionicons
+                name="call-outline"
+                size={16}
+                color={theme.colors.gray.gray04}
+              />
+              <MaskedText
+                type="phone"
+                value={mobilePhone}
+                style={styles.textSmall}
+              />
+            </View>
+          )}
         </View>
       </View>
 
-      <View style={styles.containerCompanyStatus}>
-        {status === "ACTIVE" ? (
-          <Text>Empresa ativa</Text>
-        ) : (
-          <Text>Empresa inativa</Text>
-        )}
-
-        <Switch
-          value={isEnabled}
-          onChange={(value) => setIsEnabled(value)}
-          activeTrackColor={theme.colors.primary[100]}
-        />
-      </View>
-    </View>
+      <TouchableOpacity
+        style={styles.buttonSeeDetails}
+        activeOpacity={0.7}
+        {...rest}
+      >
+        <Text style={styles.textButton}>Ver detalhes da empresa</Text>
+      </TouchableOpacity>
+    </TouchableOpacity>
   );
 };
