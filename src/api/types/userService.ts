@@ -1,8 +1,7 @@
-import { ICompany } from "./companyService.types"
+import { ICompany } from "./companyService.types";
 
-export interface IGetUserByIdResponse {
-  data: {
-    id: string;
+export interface IUser {
+  id: string;
   name: string;
   email: string;
   cpf: string;
@@ -18,6 +17,26 @@ export interface IGetUserByIdResponse {
   createdAt: string;
   updatedAt: string;
   Company: ICompany[];
-  }
 }
 
+export interface IGetUserByIdResponse {
+  data: IUser;
+}
+
+export interface IResetPasswordSendTokenResponse {
+  success: boolean;
+  message: string;
+  userId: string;
+}
+
+export interface IResetPasswordConfirmRequest {
+  userId: string;
+  newPassword: string;
+  code: string;
+}
+
+export interface IResetPasswordConfirmResponse {
+  success: boolean;
+  message: string;
+  user: IUser;
+}

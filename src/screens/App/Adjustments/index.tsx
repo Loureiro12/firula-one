@@ -56,7 +56,7 @@ export const AdjustmentsScreen = () => {
             {
               label: "Alterar Senha",
               iconName: "lock-closed-outline",
-              // routeName: "ProfileEdit",
+              routeName: "ResetPasswordSend",
             },
             // {
             //   label: "Segurança do App",

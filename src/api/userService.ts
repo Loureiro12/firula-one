@@ -5,7 +5,12 @@ import {
   IGetUserStatusResponse,
   IUpdateUserProfileRequest,
 } from "./types/userServices.types";
-import { IGetUserByIdResponse } from "./types/userService";
+import {
+  IGetUserByIdResponse,
+  IResetPasswordConfirmRequest,
+  IResetPasswordConfirmResponse,
+  IResetPasswordSendTokenResponse,
+} from "./types/userService";
 
 export const UserService = {
   async getUserStatus(userId: string): Promise<IGetUserStatusResponse> {
@@ -51,6 +56,32 @@ export const UserService = {
     try {
       const response = await apiClient.get<IGetUserByIdResponse>(
         `/users?userId=${userId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
+
+  async resetPasswordSendToken(
+    documentNumber: string
+  ): Promise<IResetPasswordSendTokenResponse> {
+    try {
+      const response = await apiClient.post<IResetPasswordSendTokenResponse>(
+        "/reset-password/send-token",
+        { documentNumber }
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  },
+
+   async resetPasswordConfirm(data: IResetPasswordConfirmRequest): Promise<IResetPasswordConfirmResponse> {
+    try {
+      const response = await apiClient.post<IResetPasswordConfirmResponse>(
+        "/reset-password",
+        data
       );
       return response.data;
     } catch (error) {

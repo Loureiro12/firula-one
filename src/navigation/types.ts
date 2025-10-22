@@ -30,6 +30,8 @@ export type AppTabStackParamList = {
   };
   MainHelpCenter: undefined;
   FaqQuestions: { categoryId: string; categoryName: string };
+  ResetPasswordSend: undefined;
+  ResetPasswordConfirm: { userId: string; maskedTo: string };
 };
 
 export type RootStackParamList = {
