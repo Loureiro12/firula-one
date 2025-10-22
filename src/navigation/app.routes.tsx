@@ -16,6 +16,7 @@ import { CourtOpeningHoursScreen } from "@screens/App/Company/screens/courtOpeni
 import { ListAllBlockScreen } from "@screens/App/Block/screens/listAllBlock";
 import { UpdateBlockScreen } from "@screens/App/Block/screens/updateBlock";
 import UpdateCompanyScreen from "@screens/App/Company/screens/updateCompany";
+import { MainHelpCenterScreen } from "@screens/App/HelpCenter/MainHelpCenter";
 
 const Tab = createBottomTabNavigator<AppTabStackParamList>();
 const Stack = createNativeStackNavigator<AppTabStackParamList>();
@@ -103,6 +104,7 @@ export default function AppRootStack() {
       />
       <Stack.Screen name="ListAllBlock" component={ListAllBlockScreen} />
       <Stack.Screen name="UpdateBlock" component={UpdateBlockScreen} />
+      <Stack.Screen name="MainHelpCenter" component={MainHelpCenterScreen} />
     </Stack.Navigator>
   );
 }

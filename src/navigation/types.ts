@@ -28,6 +28,7 @@ export type AppTabStackParamList = {
   UpdateBlock: {
     blockId: string;
   };
+  MainHelpCenter: undefined;
 };
 
 export type RootStackParamList = {

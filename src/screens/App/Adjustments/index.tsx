@@ -58,11 +58,11 @@ export const AdjustmentsScreen = () => {
               iconName: "lock-closed-outline",
               // routeName: "ProfileEdit",
             },
-            {
-              label: "Segurança do App",
-              iconName: "shield-checkmark-outline",
-              // routeName: "UserEdit",
-            },
+            // {
+            //   label: "Segurança do App",
+            //   iconName: "shield-checkmark-outline",
+            //   // routeName: "UserEdit",
+            // },
           ]}
         />
 
@@ -72,7 +72,7 @@ export const AdjustmentsScreen = () => {
             {
               label: "Central de Ajuda",
               iconName: "help-circle-outline",
-              // routeName: "ProfileEdit",
+              routeName: "MainHelpCenter",
             },
             {
               label: "Fale com o Suporte",
