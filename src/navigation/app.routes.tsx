@@ -17,6 +17,7 @@ import { ListAllBlockScreen } from "@screens/App/Block/screens/listAllBlock";
 import { UpdateBlockScreen } from "@screens/App/Block/screens/updateBlock";
 import UpdateCompanyScreen from "@screens/App/Company/screens/updateCompany";
 import { MainHelpCenterScreen } from "@screens/App/HelpCenter/MainHelpCenter";
+import FaqQuestionsScreen from "@screens/App/HelpCenter/FaqQuestions";
 
 const Tab = createBottomTabNavigator<AppTabStackParamList>();
 const Stack = createNativeStackNavigator<AppTabStackParamList>();
@@ -105,6 +106,7 @@ export default function AppRootStack() {
       <Stack.Screen name="ListAllBlock" component={ListAllBlockScreen} />
       <Stack.Screen name="UpdateBlock" component={UpdateBlockScreen} />
       <Stack.Screen name="MainHelpCenter" component={MainHelpCenterScreen} />
+      <Stack.Screen name="FaqQuestions" component={FaqQuestionsScreen} />
     </Stack.Navigator>
   );
 }

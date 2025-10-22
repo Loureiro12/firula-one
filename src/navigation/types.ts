@@ -29,6 +29,7 @@ export type AppTabStackParamList = {
     blockId: string;
   };
   MainHelpCenter: undefined;
+  FaqQuestions: { categoryId: string; categoryName: string };
 };
 
 export type RootStackParamList = {
