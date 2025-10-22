@@ -9,7 +9,7 @@ import { useAdjustments } from "./hooks";
 
 export const AdjustmentsScreen = () => {
   const { logout } = useAuthStore();
-  const {handleNavigationToEditProfile, user} = useAdjustments();
+  const {handleNavigationToEditProfile, user, callWhatsApp} = useAdjustments();
 
   const handleLogout = async () => {
     await logout();
@@ -77,7 +77,7 @@ export const AdjustmentsScreen = () => {
             {
               label: "Fale com o Suporte",
               iconName: "chatbubble-ellipses-outline",
-              // routeName: "UserEdit",
+              function: callWhatsApp,
             },
             {
               label: "Sair da conta",
