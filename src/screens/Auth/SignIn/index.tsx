@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, Touchable, TouchableOpacity, View } from "react-native";
 import { Controller } from "react-hook-form";
 
 import { Button, Input } from "@components/atoms";
@@ -19,6 +19,7 @@ export default function SignInScreen() {
     setSubmitted,
     submitted,
     handleNavigateToSignUp,
+    handleNavigateToForgotPassword
   } = useSignIn();
 
   return (
@@ -81,6 +82,16 @@ export default function SignInScreen() {
             )}
             name="password"
           />
+
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.buttonForgotPassword}
+            onPress={handleNavigateToForgotPassword}
+          >
+            <Text style={styles.textForgotPassword}>
+              {locales.form.forgotPassword}
+            </Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{

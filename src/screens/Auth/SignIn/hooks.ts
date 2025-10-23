@@ -24,6 +24,10 @@ export const useSignIn = () => {
     navigation.navigate("SignUp");
   };
 
+  const handleNavigateToForgotPassword = () => {
+    navigation.navigate("ResetPasswordSendPublic");
+  };
+
   const {
     control,
     handleSubmit,
@@ -71,5 +75,6 @@ export const useSignIn = () => {
     setSubmitted,
     onSubmit,
     handleNavigateToSignUp,
+    handleNavigateToForgotPassword,
   };
 };

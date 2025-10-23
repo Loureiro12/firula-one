@@ -42,11 +42,11 @@ export const AdjustmentsScreen = () => {
               iconName: "person-outline",
               routeName: "ListAllBlock",
             },
-            {
-              label: "Notificações",
-              iconName: "folder-outline",
-              // routeName: "UserEdit",
-            },
+            // {
+            //   label: "Notificações",
+            //   iconName: "folder-outline",
+            //   // routeName: "UserEdit",
+            // },
           ]}
         />
 

@@ -3,6 +3,8 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 export type AuthRootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
+  ResetPasswordSendPublic: undefined;
+  ResetPasswordConfirm: { userId: string; maskedTo: string, flow?: string };
 };
 
 export type AppTabStackParamList = {

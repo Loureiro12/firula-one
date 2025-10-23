@@ -37,4 +37,12 @@ export const styles = StyleSheet.create({
     color: theme.colors.primary["100"],
     fontWeight: "bold",
   },
+  textForgotPassword: {
+    color: theme.colors.primary["100"],
+    fontSize: theme.typography.fontSizes.sm,
+    marginBottom: theme.spacing["4"],
+  },
+  buttonForgotPassword: {
+    alignSelf: "flex-end",
+  }
 });

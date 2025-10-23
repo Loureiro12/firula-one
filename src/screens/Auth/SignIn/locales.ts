@@ -19,5 +19,6 @@ export const locales = {
     buttons: {
       signIn: "Entrar",
     },
+    forgotPassword: "Esqueci minha senha",
   },
 };

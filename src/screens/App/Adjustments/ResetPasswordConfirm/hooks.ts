@@ -1,4 +1,5 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { AuthRootStackParamList } from "@navigation/types";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Alert } from "react-native";
@@ -11,9 +12,11 @@ type FormData = {
   confirmPassword: string;
 };
 
+type ResetPasswordConfirmRouteProp = RouteProp<AuthRootStackParamList, 'ResetPasswordConfirm'>;
+
 export const useResetPasswordConfirm = () => {
   const navigation = useNavigation();
-  const route = useRoute();
+  const route = useRoute<ResetPasswordConfirmRouteProp>();
   const { userId } = (route.params || {}) as { userId?: string };
   const { control, handleSubmit } = useForm<FormData>();
 
@@ -42,7 +45,13 @@ export const useResetPasswordConfirm = () => {
               // show success message then logout
               useAuthStore.getState().logout();
               // navigate to login (assumes auth flow will be presented by root)
-              navigation.navigate("Auth" as never);
+
+              if (route.params.flow === 'signIn') {
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: "SignIn" }],
+                });
+              }
             }
           }
         ]);
